@@ -1,0 +1,21 @@
+@media screen and (max-width: 767px) {
+    .slide-button{
+        display: block;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 9999;
+    }
+    #sidebar{
+        position: absolute;
+        left: -150%;
+    }
+    #sidebar.visible{
+        left: 0;
+    }
+    .sidebar-content{
+        display: none;
+    }
+    .flexslider, .flexslider .slides li, .flexslider .slides > li > a { height: 244px; }
+    .flex-direction-nav { display: none; }
+}

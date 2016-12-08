@@ -1,0 +1,203 @@
+/* Gallery-Tab */
+.tabs {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    width: 100%;
+    font-weight: 300;
+    font-size: 1.25em;
+}
+
+/* Nav */
+.tabs nav {
+    text-align: center;
+}
+
+.tabs nav a {
+    line-height: 2.5;
+}
+
+.tabs nav span {
+    vertical-align: middle;
+    font-size: 0.95em;
+    font-family: 'PT Sans';
+}
+
+.tabs nav li.active a {
+    color: #74777b;
+}
+
+.tabs nav a:focus {
+    outline: none;
+}
+/*****************************/
+/* Line Box */
+/*****************************/
+
+.tabs-style-linebox nav ul li {
+    margin: 0 0.5em;
+}
+
+.tabs-style-linebox nav li {
+    padding: 0.5em 1.0em 0.5em 1.0em;
+    color: #74777b;
+    border-bottom: 1px solid #e500ff;
+    font-weight: 700;
+    -webkit-transition: color 0.3s;
+    transition: color 0.3s;
+}
+
+.tabs-style-linebox nav li:hover,
+.tabs-style-linebox nav li:focus {
+    color: #fff;
+    border-color: #e500ff;
+    cursor: pointer;
+}
+
+.tabs-style-linebox nav li.active {
+    color: #fff;
+    border-bottom: 2px solid #e500ff;
+    cursor: default;
+    background: #e500ff;
+}
+/* Sweep To Top */
+.hvr-sweep-to-top {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+.hvr-sweep-to-top:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #e500ff;
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+.hvr-sweep-to-top:hover, .hvr-sweep-to-top:focus, .hvr-sweep-to-top:active {
+    color: white;
+}
+.hvr-sweep-to-top:hover:before, .hvr-sweep-to-top:focus:before, .hvr-sweep-to-top:active:before {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+}
+
+.gallery{
+    min-height: 370px;
+}
+.gallery-photos-thumb .mix {
+    display: none;
+}
+.gallery-photo-item {
+    overflow: hidden;
+    border:0 none;
+    margin: 0 ;
+    padding:0;
+    width: 20%;
+    position: relative;
+    float: left;
+}
+.gallery-photo-item .photo-thumb img {
+    width: 100%;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+.gallery-photo-item .overlay{
+    position: absolute;
+    background-color: rgba(215, 38, 181, 0.6);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.gallery-photo-item:hover .photo-thumb img {
+    -webkit-transform:scale(1.3);
+    transform:scale(1.3);
+    overflow:hidden !important;
+}
+
+.gallery span.gallery-icon {
+    position:relative;
+    top:42%;
+    color:#fff;
+    border:1px solid #ffffff;
+    border-radius:50%;
+    width:50px;
+    display: inline-block;
+    /*  padding:10px;
+      padding-top: 5px; */
+    height:50px;
+    text-align: center;
+    line-height:60px;
+}
+.gallery span.gallery-icon .fa {
+    margin-left: 5px;
+    margin-right: auto;
+    text-align: center;
+}
+.gallery span.gallery-icon .fa-search-plus {
+    margin-left: 4px;
+}
+
+.albumbox {
+    overflow:hidden;
+    position:relative;
+    display: inline-block;
+    cursor: pointer;
+}
+.albumbox h4{
+    text-transform: uppercase;
+}
+.albumbox .albumbox-inner{
+    padding:10px 10px 0 10px;
+    width:100%;
+    background-color:rgba(0,0,0,0.7);
+    position:absolute;
+    bottom:0;
+    display: inline-block;
+    border-top:1px solid #e500ff;
+    height:50px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+}
+
+.albumbox:hover .albumbox{
+    bottom: 0;
+}
+.albumbox .albumbox-inner h4{
+    color:#e500ff;
+    font-size:16px;
+    padding-bottom:15px;
+
+}
+.albumbox .albumbox-inner p{
+    color:#fff;
+    font-size:14px;
+    padding-bottom:0;
+}

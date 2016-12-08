@@ -1,0 +1,186 @@
+html,
+body {
+    overflow-x: hidden; /* Prevent scroll on narrow devices */
+    font-size: 14px;
+}
+ol,li{
+    list-style: none;
+}
+a{
+    color: #b900ff;
+}
+a:hover{
+    color: #000;
+    text-decoration: none;
+}
+body.bg{
+    background: #000000 url('../../../uploads/asset/bg/dance_rush.jpg') no-repeat;
+}
+.content{
+    min-height: 300px;
+    background: #ffffff;
+}
+
+header{
+    width: 100%;
+    z-index: 1000;
+    background: rgba(0,0,0,0.5);
+    -webkit-transition: all .8s ease-in-out;
+    -o-transition: all .8s ease-in-out;
+    transition: all .8s ease-in-out;
+}
+header:hover{
+    background: rgba(0,0,0,1) ;
+}
+header .nav li span{
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    color: #ffffff;
+}
+header .nav li span.sub{
+    font-size: 10px;
+}
+header .nav li a{
+    text-transform: uppercase;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+header .phone h4{
+    color: #ffffff;
+}
+
+/* Модальное окно */
+.modal-content{
+    background: rgba(0,0,0,0.8);
+    border: 1px solid #b900ff;
+    z-index: 9999;
+}
+.modal-header, .modal-footer, .modal-body{
+    border:none;
+    color: #fff;
+}
+.modal-header .close{
+    color: #FFFFFF;
+}
+.modal-body input{
+    background: rgba(0,0,0,0.9);
+    border: 1px solid #b900ff;
+    border-radius: 0;
+    padding: 10px 5px;
+    color: #ffffff;
+}
+.modal-body input:focus{
+    background: rgba(0,0,0,0.9);
+    border: 1px solid #b900ff;
+}
+/* Кнопки */
+.btn{
+    border-radius: 0;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.btn-primary {
+    color: #ffffff;
+    background-image: none;
+    background-color: #b900ff;
+    border-color: #9a03d3;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active{
+    color: #fff;
+    background-color: #b900ff;
+    border-color: #9a03d3;
+}
+.btn-outline-primary {
+    color: #b900ff;
+    background-image: none;
+    background-color: transparent;
+    border-color: #9a03d3;
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus{
+    color: #fff;
+    background-color: #b900ff;
+    border-color: #9a03d3;
+}
+
+.footer{
+    min-height: 150px;
+    background: #000;
+    padding: 10px 0;
+    color: #ffffff;
+}
+.footer .copyright{
+    font-size: 12px;
+    color: #999999;
+}
+
+.wrapper{
+    position: relative;
+}
+.header{
+    height: 400px;
+    position: relative;
+}
+.header div.breadcrumb{
+    position: absolute;
+    bottom:-14px ;
+    background: rgba(0,0,0,0.7);
+    width: 100%;
+}
+.header div.breadcrumb ol{
+    border-radius:0 ;
+    font-size: 12px;
+}
+.header div.breadcrumb ol a:hover{
+    color: #ffffff;
+}
+.header .page-title{
+    position: absolute;
+    bottom: 55px;
+}
+.header .page-title h3{
+    color: #ffffff;
+}
+
+
+.nav-tabs{border: none; border-bottom: 1px solid #444444}
+.nav-tabs li{
+    float: left;}
+
+.nav-tabs li a{
+    display: block;
+    padding: 10px 21px;
+    color: #000000;
+    text-decoration: none;
+    -webkit-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+.nav-tabs li a:hover,
+.nav-tabs li.active a{
+    background: #b900ff;
+    color: #ffffff;
+}
+.tab-content{
+    padding: 9px 0 9px 0;
+}
+
+.panel {
+    margin-bottom: 30px;
+}
+.panel .panel-heading{
+    padding-bottom: 5px ;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #b900ff;
+}
+.panel .panel-heading.dotted{
+    border-bottom: 1px dotted #b900ff;
+}
+.panel img{
+    width: 100%;
+}
