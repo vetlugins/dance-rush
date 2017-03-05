@@ -1,3 +1,9 @@
 /.idea
 /application/logs
 /system
+modules/userguide/vendor/
+plugins/filemanager/files/.quarantine/
+templates/admin/images/
+uploads/.quarantine/
+uploads/.tmb/
+uploads/xml/
