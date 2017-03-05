@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-    <title><?php echo $item['title']? $item['title'].' :: ' : ''; echo $data->meta_title ? $data->meta_title : $data->title ?> :: <?php echo Params::obtain('site_title') ?></title>
+    <title><?php echo isset($item['title'])? $item['title'].' :: ' : ''; echo $data->meta_title ? $data->meta_title : $data->title ?> :: <?php echo Params::obtain('site_title') ?></title>
 
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <meta charset="utf-8">
