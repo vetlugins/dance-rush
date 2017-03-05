@@ -21,7 +21,6 @@ class Controller_Page extends Controller_Common {
             switch($data->url){
                 case 'index':
 
-                    $articles = ORM::factory('Blog_Article')->limit(3)->order_by('id','DESC')->where_soft()->find_all();
                     $reviews = ORM::factory('Reviews')->where_soft()->order_by('id','DESC')->find_all();
 
                     $content = View::factory( Kohana::$config->load('site.theme').'/pages/main')
