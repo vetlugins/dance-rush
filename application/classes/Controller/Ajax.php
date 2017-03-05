@@ -249,5 +249,308 @@ class Controller_Ajax extends Controller{
         }
     }
 ////////////////////////////////////////////////////////////////////////////////
+    public function action_load(){
 
+        if(isset($_POST['loadNews'])){
+
+            $offset = $_POST['news'];
+            $lang = $this->request->param('lang');
+            $config = Kohana::$config->load('blog');
+
+            if(empty($_POST['category'])){
+                $article = ORM::factory('Blog_Article')->articles($lang,'offset',$offset);
+                $count = count($article);
+            }else{
+                $category = ORM::factory('Blog_Category')->where('url','=',$_POST['category'])->find();
+                $article = $category->articles->articles($lang,'offset',$offset);
+                $count = $category->articles->count_all();
+            }
+
+            if($count > 0){
+
+                $url_site = $this->lang($lang).'news';
+
+                $post = View::factory( Kohana::$config->load('site.theme').'/news/_snippets/_posts')->bind('posts', $article)
+                    ->bind('url_site',$url_site)->bind('config',$config);
+
+                echo $post;
+
+            }else echo 0;
+
+        }
+
+        if(isset($_POST['loadComment'])){
+
+            $config = Kohana::$config->load('blog');
+
+            $offset = $_POST['news'];
+
+            $comments = ORM::factory('Comments')->comments($_POST['id'],'Blog',10,$offset);
+
+            $count = count($comments);
+
+            if($count > 0){
+
+                $show_comments = '';
+
+                foreach($comments as $value){
+
+                    if($value->user_id == 0){
+                        $username = $value->name;
+                        $city = $value->city;
+
+                        $image = '/uploads/system/no_avatar.jpg';
+                    }else{
+                        $username = $value->author->username;
+                        $city = $value->author->city;
+
+                        if(is_file(DOCROOT.'uploads/users/'.$value->author->photo)) $image = '/uploads/users/'.$value->author->photo;
+                        else $image = '/uploads/system/no_avatar.jpg';
+                    }
+
+                    $date = new DateFormat($value->created_at);
+                    $date = $date->get_date($config->get('date_format'));
+
+                    $item_comment = [
+                        'comment' => $value->comment,
+                        'date' => $date,
+                        'photo' => $image,
+                        'name' => $username,
+                        'city' => $city,
+                        'id' => $value->id,
+                        'rating' => $value->rating
+                    ];
+
+                    $show_comments .= View::factory( Kohana::$config->load('site.theme').'/news/show_comments')->bind('comments',$item_comment);
+                }
+
+                echo $show_comments;
+
+            }else echo 0;
+
+        }
+    }
+////////////////////////////////////////////////////////////////////////////////
+    public function action_save(){
+
+        if(isset($_POST['insertComment'])){
+
+            $error = '';
+            $text = '';
+            $status = 'ok';
+
+            $config = Kohana::$config->load('blog');
+
+            Cookie::set('time_flud', $config->get('comment_flud'), $config->get('comment_flud_time'));
+
+            $POST = VFunction::checkItem($_POST);
+
+            if($config->get('comment_flud') == 1 and Cookie::get('time_flud') == 1){
+                $error = __('Нельзя так часто оставлять комментарии. Попробуйте через '.$config->get('comment_flud_time').' сек.');
+            }
+
+            if(Auth::instance()->get_user()){
+                $POST['user_id'] = Auth::instance()->get_user()->id;
+            }else{
+
+                $name = Validation::factory($POST)
+                    ->rule('name','not_empty')
+                    ->rule('comment','not_empty');
+
+                if(!$name->check()){
+                    $error = __('Пожалуйста! Заполните все обязательные поля.');
+                }
+            }
+
+            if(empty($error)){
+
+                if($config->get('comment_flud') == 1) Cookie::set('time_flud', $config->get('comment_flud'), $config->get('comment_flud_time'));
+
+                $POST['comment'] = VFunction::html_wrapper($POST['comment']);
+                $POST['userAgent'] = $_SERVER['HTTP_USER_AGENT'];
+                $POST['ip'] = $_SERVER['SERVER_ADDR'];
+
+                $comment = ORM::factory('Comments')->values($POST)->save();
+
+                if($comment->saved()){
+
+                    if($comment->user_id == 0){
+
+                        $username = $comment->name;
+                        $city = $comment->city;
+
+                        $image = '/uploads/system/no_avatar.jpg';
+                    }else{
+                        $username = $comment->author->username;
+                        $city = $comment->author->city;
+
+                        if(is_file(DOCROOT.'uploads/users/'.$comment->author->photo)) $image = '/uploads/users/'.$comment->author->photo;
+                        else $image = '/uploads/system/no_avatar.jpg';
+                    }
+
+                    $date = new DateFormat($comment->created_at);
+                    $date = $date->get_date($config->get('date_format'));
+
+                    $item = [
+                        'comment' => $comment->comment,
+                        'date' => $date,
+                        'photo' => $image,
+                        'name' => $username,
+                        'city' => $city,
+                        'id' => $comment->id,
+                        'rating' => 0
+                    ];
+
+                    $text = View::factory( Kohana::$config->load('site.theme').'/news/show_comments')->bind('comments',$item);
+                    $text = '<li>'.$text.'</li>';
+
+                    $email['to'] = 'admin';
+                    $email['type'] = 'comment';
+                    $email['comment_id'] = $comment->id;
+
+                    SendEmail::factory($email)->send();
+
+                }else{
+                    $error = __('Не удалось добавить комментарий');
+                    $status = 'error';
+                }
+            }else{
+                $status = 'error';
+            }
+
+            $count = ORM::factory('Comments')->count($POST['item_id'],'Blog');
+
+            $json = array('status' => $status,'error' => $error,'comment' => $text,'count' => $count);
+
+            echo json_encode($json);
+        }
+
+        if(isset($_POST['likeComment'])){
+
+            $likes = ORM::factory('Comments')->where('id','=',$_POST['id'])->find();
+
+            $count = $likes->rating + 1;
+            $likes->set('rating',$count)->update();
+
+
+
+            echo $likes->rating;
+        }
+
+        if(isset($_POST['insertSubscribe'])){
+
+            $text = '';
+            $status = 'ok';
+
+            $POST = VFunction::checkItem($_POST);
+
+            $name = Validation::factory($POST)
+                ->rule('email','not_empty')
+                ->rule('email','email')
+                ->rule('email', 'Model_Subscribe::check_email',array(':value',':validation', ':field'));
+
+            if(!$name->check()){
+                $text = __('Пожалуйста! Заполните поле email правильно.');
+                $status = 'error';
+            }
+
+            if($status == 'ok'){
+
+                $POST['userAgent'] = $_SERVER['HTTP_USER_AGENT'];
+                $POST['ip'] = $_SERVER['SERVER_ADDR'];
+
+                $subscribe = ORM::factory('Subscribe')->values($POST)->save();
+
+                if($subscribe->saved()){
+
+                    Cookie::set('email',$subscribe->email);
+                    Cookie::set('subscribe',1);
+
+                    $text = __('Спасибо за подписку!');
+
+                    $email['to'] = 'admin';
+                    $email['type'] = 'subscribe';
+                    $email['subscribe_id'] = $subscribe->id ;
+
+                    SendEmail::factory($email)->send();
+
+                }else{
+                    $text = __('Не удалось добавить Вас в базу подписки');
+                    $status = 'error';
+                }
+            }
+
+            $json = array('status' => $status,'text' => $text);
+
+            echo json_encode($json);
+        }
+    }
+////////////////////////////////////////////////////////////////////////////////
+    public function action_send(){
+
+        if(isset($_POST['letter'])){
+
+            $status = 'ok';
+
+            if($status == 'ok'){
+
+                $email = [
+                    'to' => 'admin',
+                    'type' => 'letter',
+                    'message' => $_POST['message'],
+                    'from_email' => $_POST['email'],
+                    'name' => $_POST['name']
+                ];
+
+                SendEmail::factory($email)->send();
+
+            }else{
+                $status = 'error';
+            }
+
+            echo $status;
+        }
+
+
+        if(isset($_POST['enroll'])){
+
+            $status = 'ok';
+
+            if($status == 'ok'){
+
+                if($_POST['enroll'] == 'company'){
+
+                    $email = [
+                        'to' => 'admin',
+                        'type' => 'enroll',
+                        'name' => $_POST['name'],
+                        'phone' => $_POST['phone'],
+                        'object' => 'company'
+                    ];
+
+
+                }elseif($_POST['enroll'] == 'client'){
+                    $email = [
+                        'to' => 'admin',
+                        'type' => 'enroll',
+                        'name' => $_POST['name'],
+                        'phone' => $_POST['phone'],
+                        'object' => 'client'
+                    ];
+                }else{
+                    $email = [];
+                }
+
+                if(count($email))SendEmail::factory($email)->send();
+                else $status = 'error';
+
+
+            }else{
+                $status = 'error';
+            }
+
+            echo $status;
+        }
+
+    }
 }

@@ -2,7 +2,7 @@
 
 return array(
 
-	'trusted_hosts' => array('dance-rush\.via'
+	'trusted_hosts' => array('dancerush\.local','dancerush\.via'
 		// Set up your hostnames here
 		//
 		// Example:

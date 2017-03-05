@@ -22,4 +22,7 @@ class Model_Video_Items extends ORM{
 		)
 	);
 
+	public function soft_delete(){
+		return $this->set('deleted_at', date('Y-m-d H:i:s'))->update();
+	}
 }

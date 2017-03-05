@@ -1,10 +1,10 @@
-<div class="content container pt-1 pb-1">
+<section id="services" class="block min-height bg-color-orange font-color-white">
 
-    <div class="services-price">
-        <h2 class="text-lg-center mt-3">С помощью студии современного танца «DANCE RUSH»
-            вы можете подготовить танцевальные номера.</h2>
+    <div class="container">
 
-        <div class="service mt-3 p-0">
+        <h2 class="section-title wow fadeInUp text-center" data-wow-duration="2s">С помощью студии современного танца «DANCE RUSH» вы можете подготовить танцевальные номера.</h2>
+
+        <div class="service p-0">
 
             <div class="servicebox col-md-12 p-0">
                 <img class="img-responsive" src="/uploads/dance/dance_144558495434343.jpg" alt="Dance Rush service" />
@@ -51,7 +51,13 @@
 
         </div>
 
-        <h2 class="text-lg-center mt-3 mb-3">Цены "не кусаются"</h2>
+    </div>
+
+</section>
+
+<section id="services" class="block min-height">
+    <div class="container">
+        <h2 class="section-title text-center">Цены "не кусаются"</h2>
 
         <div class="col-md-6">
             <p class="wow fadeIn" data-wow-delay="0.2s" style="margin-bottom: 30px; font-size: 22px">Пробное занятие - <strong>БЕСПЛАТНО!</strong></p>
@@ -60,7 +66,8 @@
             <p class="wow fadeIn" data-wow-delay="0.8s" style="margin-bottom: 30px; font-size: 22px">Постановка танцевального номера - от <strong>3000 руб.</strong></p>
         </div>
         <div class="col-md-6">
-            <img class="img-responsive" src="<?php echo $params['url_base'] ?>uploads/asset/form-img.jpg" alt="Dance Rush service" />
+            <img class="img-responsive" src="/uploads/system/assets/form-img.jpg" alt="Dance Rush service" />
         </div>
+
     </div>
-</div>
+</section>

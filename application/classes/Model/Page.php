@@ -4,18 +4,29 @@ class Model_Page extends ORM{
 	
 	protected $_table_name = 'via_page';
 
-	protected  $_belongs_to = array(
-		'menu'           => array(
-			'model'         => 'Menu',
-			'foreign_key'   => 'menu_id',
-		),
-	);
-
 	public function soft_delete(){
 		return $this->set('deleted_at', date('Y-m-d H:i:s'))->update();
 	}
 
-	public function getAllPages($lang,$parent = 0){
+	public function where_soft(){
+		return $this->where('deleted_at','=',null);
+	}
+
+	public function change_key($key){
+		$this->_primary_key = $key;
+	}
+
+	public function parent($parent = 0){
+		return $this->where('parent_id','=',$parent);
+	}
+
+	public function lang($lang = 'ru'){
+		return $this->where('lang','=',$lang);
+	}
+
+
+	public function pages($lang,$parent = 0){
+
 		return $this->where('lang', '=', $lang)
 			->and_where('deleted_at','=',null)
 			->and_where('parent_id','=',$parent)
@@ -23,21 +34,27 @@ class Model_Page extends ORM{
 			->find_all();
 	}
 
+	public function page($id){
+		return $this->where('id', '=', $id)
+			->and_where('deleted_at','=',null)
+			->find();
+	}
+
 	public function get_page_option($pages_option = array(),$lang='ru',$current=0){
 
 		$list = '';
 		$item = array();
 
-		if(!empty($pages_option)){
+		if(count($pages_option)){
 			$dash = ' - ';
 		}else{
 			$dash = '';
-			$pages_option = $this->getAllPages($lang,0);
+			$pages_option = $this->pages($lang,0);
 		}
 
 		foreach($pages_option as $page){
 
-			$children = $this->getAllPages($page->lang,$page->id);
+			$children = $this->pages($page->lang,$page->id);
 
 			if(count($children) > 0){
 				$item['get_children'] = $this->get_page_option($children,$page->lang,$current);
@@ -49,7 +66,7 @@ class Model_Page extends ORM{
 			$item['parents'] = $children;
 			$item['current'] = $current;
 
-			$list .= View::factory('/admin/pages/page/list_option')
+			$list .= View::factory('/admin/pages/list_option')
 				->bind('item', $item);
 
 			$dash .= $dash;
@@ -58,4 +75,15 @@ class Model_Page extends ORM{
 
 		return $list;
 	}
+
+	public static function check_url($value, $validation, $field, $lang)
+	{
+		$page = ORM::factory('Page')->where('url','=',$value)->where('lang','=',$lang)->find();
+
+		if($page->loaded())
+		{
+			$validation->error($field, Kohana::message('validation', 'check_url'));
+		}
+	}
+
 }

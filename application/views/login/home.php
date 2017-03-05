@@ -7,11 +7,11 @@
     <title>Авторизация администратора</title>
 
     <!-- Maniac stylesheets -->
-    <link rel="stylesheet" href="<?php echo $params['theme'] ?>css/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?php echo $params['theme'] ?>css/font-awesome.min.css" />
-    <link rel="stylesheet" href="<?php echo $params['theme'] ?>css/animate/animate.min.css" />
-    <link rel="stylesheet" href="<?php echo $params['theme'] ?>css/bootstrapValidator/bootstrapValidator.min.css" />
-    <link rel="stylesheet" href="<?php echo $params['theme'] ?>css/iCheck/all.css" />
+    <link rel="stylesheet" href="<?php echo Params::plugins() ?>bootstrap/3.3.7/bootstrap.css" />
+    <link rel="stylesheet" href="<?php echo Params::plugins() ?>icon/css/font-awesome.css" />
+    <link rel="stylesheet" href="<?php echo Params::plugins() ?>animate/animate.css" />
+    <link rel="stylesheet" href="<?php echo Params::plugins() ?>bootstrapValidator/bootstrapValidator.min.css" />
+    <link rel="stylesheet" href="<?php echo Params::plugins() ?>iCheck/all.css" />
     <link rel="stylesheet" href="<?php echo $params['theme'] ?>css/style.css" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

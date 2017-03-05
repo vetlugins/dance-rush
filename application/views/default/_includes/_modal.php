@@ -1,4 +1,4 @@
-<!-- Modal -->
+<!-- Modal
 <div class="modal fade" id="enroll" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -22,6 +22,25 @@
                 <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Закрыть</button>
                 <button type="button" class="btn btn-outline-primary">Отправить заявку</button>
             </div>
+        </div>
+    </div>
+</div>
+-->
+
+<!-- Модальные окна-->
+<div class="modal fade" id="modalContactSuccess" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 class="modal-title"><i class="icon icon-paper-plane"></i>Отлично!<br>Ваша письмо успешно отправлено!</h3>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalContactError" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 class="modal-title"><i class="icon icon-optin-monster"></i>Ошибка</h3>
         </div>
     </div>
 </div>

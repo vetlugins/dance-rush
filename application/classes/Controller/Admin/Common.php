@@ -24,20 +24,27 @@ abstract class Controller_Admin_Common extends Controller_Template {
             HTTP::redirect('/');
         }
 
+        I18n::lang('ru');
+
         /*Основные настройки сайта*/
         $this->params = array(
             'config'   => Kohana::$config->load('site'),
             'url_site' => URL::site(),
             'url_site_admin' => URL::site('/admin'),
             'url_base' => URL::base(),
-            'theme'    => '/templates/admin/'
+            'theme'    => '/templates/admin/',
+            'plugins' => '/templates/plugins/'
         );
+
+        /*Основные настройки админки*/
+        $config = Kohana::$config->load('admin');
 
         $this->languages = ORM::factory('Lang')->find_all();
 
         View::bind_global('params', $this->params);
         View::bind_global('page', $this->page);
         View::bind_global('languages', $this->languages);
+        View::bind_global('config', $config);
 	}
 
 }

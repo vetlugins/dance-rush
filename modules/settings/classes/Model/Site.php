@@ -18,7 +18,7 @@ class Model_Site extends Model
 			->from('via_site_setting')
 			->as_object()
 			->execute()
-			->as_array('name', 'value');
+			->as_array('name', 'value', 'title', 'section');
 	}
 	
 	// add a new configuration item
@@ -26,7 +26,7 @@ class Model_Site extends Model
 	{
 		try {
 			$results = DB::insert('via_site_setting',
-					array('name', 'value')
+					array('name', 'value', 'title', 'section')
 				)
 				->values(array($name, $value))
 				->execute();
@@ -40,11 +40,13 @@ class Model_Site extends Model
 	}
 	
 	// set value for a single configuration item
-	public function set($name, $value)
+	public function set($name, $value, $section,$title)
 	{
 		try {
 			$data = array(
 				'value' => $value,
+				'section' => $section,
+				'title' => $title,
 			);
 			
 			$result = DB::update('via_site_setting')
@@ -69,7 +71,17 @@ class Model_Site extends Model
 			->as_object()
 			->execute();
 
-		return count($results) > 0 ? $results[0]->value : NULL;
+		return count($results) > 0 ? $results : NULL;
+	}
+
+	public function section($id){
+
+		return DB::select()
+			->from('via_site_setting')
+			->where('section', '=', $id)
+			->as_object()
+			->execute();
+
 	}
 }
 // End of Model Settings

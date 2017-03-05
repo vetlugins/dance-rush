@@ -46,18 +46,18 @@ class DateFormat
     const MINUTE = 60;
 
     private $month_format_full = array(
-        '01' => 'январь',
-        '02' => 'февраль',
-        '03' => 'март',
-        '04' => 'аперль',
-        '05' => 'май',
-        '06' => 'июнь',
-        '07' => 'июль',
-        '08' => 'август',
-        '09' => 'сентябрь',
-        '10' => 'октябрь',
-        '11' => 'ноябрь',
-        '12' => 'декабрь',
+        '01' => 'января',
+        '02' => 'февраля',
+        '03' => 'марта',
+        '04' => 'аперля',
+        '05' => 'мая',
+        '06' => 'июня',
+        '07' => 'июля',
+        '08' => 'августа',
+        '09' => 'сентября',
+        '10' => 'октября',
+        '11' => 'ноября',
+        '12' => 'декабря',
     );
     private $month_format_shot = array(
         '01' => 'янв',
@@ -197,8 +197,11 @@ class DateFormat
             case 'L, d F Y': //где L полное наимнование недели
                 $date = $this->week() . ', ' . $this->day . ' ' . $this->month('full') . ' ' . $this->year;
                 break;
-            case 'd F Y в H:i':
+            case 'd.F.Y в H:i':
                 $date = $this->day . ' ' . $this->month('full') . ' ' . $this->year . ' в ' . $this->hour_24 . ':' . $this->minute;
+                break;
+            case 'd M Y H:i':
+                $date = $this->day . ' ' . $this->month('shot') . ' ' . $this->year . ' ' . $this->hour_24 . ':' . $this->minute;
                 break;
         }
 
