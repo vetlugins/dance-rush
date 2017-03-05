@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 
+    <title><?php if(isset($item)){ echo  $item['title'].' :: ';} echo $data->meta_title ? $data->meta_title : $data->title ?> :: <?php echo Params::obtain('site_title') ?></title>
 
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <meta charset="utf-8">
