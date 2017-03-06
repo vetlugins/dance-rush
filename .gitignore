@@ -1,17 +1,8 @@
-<<<<<<< HEAD
 /.idea
-uploads
-system
-application/config
-=======
-/.idea
+/application/config
 /application/logs
 /system
 modules/userguide/vendor/
 plugins/filemanager/files/.quarantine/
 templates/admin/images/
-uploads/.quarantine/
-uploads/.tmb/
-uploads/xml/
-/application/config
->>>>>>> b4afb15f61df57585de48dc0e40e4160e6b2d254
+uploads
