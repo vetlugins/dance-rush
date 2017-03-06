@@ -7,3 +7,4 @@ templates/admin/images/
 uploads/.quarantine/
 uploads/.tmb/
 uploads/xml/
+/application/config
