@@ -83,6 +83,7 @@
                         <li class="header"><i class="fa fa-bell"></i>  <?php echo Kohana::message('admin', 'titles.default.count_alert') ?> <?php //echo $new_item['i'] ?></li>
                         <li>
                             <ul>
+                                <li>Тест!!</li>
                                 <?php //echo $new_item['new'] ?>
                             </ul>
                         </li>
