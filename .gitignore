@@ -1,6 +1,7 @@
 /.idea
 /application/config
 /application/logs
+/application/cache
 /system
 modules/userguide/vendor/
 plugins/filemanager/files/.quarantine/
