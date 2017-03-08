@@ -24,7 +24,8 @@ abstract class Controller_Admin_Common extends Controller_Template {
             HTTP::redirect('/');
         }
 
-        I18n::lang('ru');
+        if($_GET['lang']) I18n::lang($_GET['lang']);
+        else I18n::lang('ru');        
 
         /*Основные настройки сайта*/
         $this->params = array(
