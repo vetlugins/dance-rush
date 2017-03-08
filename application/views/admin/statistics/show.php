@@ -34,9 +34,9 @@
 
                         foreach($metrics['pages'] as $value){
                             echo '<tr>
-                                    <td><a class="select-page" data-id="'.$value['id'].'" href="#" data-toggle="tooltip" title="Посмотреть статистику страницы">'.$value['page'].'</a> <a href="'.$value['page'].'" target="_blank" title="Переход на страницу" data-toggle="tooltip"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
-                                    <td class="text-center">'.$value['views'].'</td>
-                                    <td class="text-center">'.$value['visits'].'</td>
+                                    <td style="word-break:break-all; width: 70%"><a class="select-page" data-id="'.$value['id'].'" href="#" data-toggle="tooltip" title="Посмотреть статистику страницы">'.$value['page'].'</a> <a href="'.$value['page'].'" target="_blank" title="Переход на страницу" data-toggle="tooltip"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
+                                    <td style="width: 15%" class="text-center">'.$value['views'].'</td>
+                                    <td style="width: 15%" class="text-center">'.$value['visits'].'</td>
                                   </tr>';
                         }
                         ?>
