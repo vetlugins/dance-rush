@@ -55,10 +55,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Статистика страницы <span id="pageTitle"></span></h4>
+                <h4 class="modal-title" id="myModalLabel"><?php echo __('Посещаемость страницы') ?> <span id="pageTitle"></span></h4>
             </div>
-            <div class="modal-body no-padding">
-                <div id="chart-page" style="width: 100%; height: 372px;"></div>
+            <div class="modal-body">
+                <div id="chart-page" style="height: 372px; margin: 0 auto"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Закрыть</button>

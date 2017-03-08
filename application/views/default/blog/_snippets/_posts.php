@@ -25,7 +25,7 @@ if(isset($posts)){
                     <div class="card-block">
                         <h4 class="card-title p-1">'.$post->title.'</h4>
                         <ul class="meta pr-1 pl-1 pb-2">
-                            <li><i class="icon icon-clock-o"></i> '.$date->get_date('d M Y H:i').'</li>
+                            <li><i class="icon icon-clock-o"></i> '.$date->get_date(Params::obtain('date_format')).'</li>
                             '.$comment.'
                             <li><i class="icon icon-eye"></i> '.$post->views.'</li>
                         </ul>

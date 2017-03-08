@@ -112,6 +112,7 @@ return array(
     'Чекбокс'                   => 'Checkbox',
     'Изображения по умолчанию'  => 'Default images',
 
-    'за последний месяц'        => 'for the last month'
+    'за последний месяц'        => 'for the last month',
+    'Посещаемость страницы'     => 'Page Attendance'
 
 );
