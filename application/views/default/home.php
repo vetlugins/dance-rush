@@ -34,8 +34,7 @@
 <body>
 
 <div id="loader">
-    <div class="loader">
-    </div>
+    <div class="loader"></div>
 </div>
 
 <?php
