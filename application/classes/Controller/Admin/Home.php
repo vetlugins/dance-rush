@@ -46,7 +46,9 @@ class Controller_Admin_Home extends Controller_Admin_Common {
     {
         $this->page['breadcrumb'] = array(array('current' => Kohana::message('admin', 'home')));
 
-        $metrica = Metrica::factory(['date1' => '3dasAgo']);
+        $date = date("Y-m-d",time()-604800);
+
+        $metrica = Metrica::factory(['date1' => $date]);
         $visits = $metrica->visits(0,true);
         $views  = $metrica->visits(1,true);
         $users  = $metrica->visits(2,true);

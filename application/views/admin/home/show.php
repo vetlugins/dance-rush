@@ -3,7 +3,7 @@
         <div class="box">
             <div class="box-title">
                 <i class="fa fa-signal"></i>
-                <h3><?php echo Kohana::message('admin', 'titles.'.$params['module'].'.statistics') ?></h3>
+                <h3><?php echo __('Статистика посещаемости за последнюю неделю') ?></h3>
                 <div class="pull-right box-toolbar"></div>
             </div>
             <div class="box-body">
