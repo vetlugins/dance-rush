@@ -3,12 +3,12 @@ return array(
 
     'Нет' => 'No',
 
-
     //Admin panel
     'Добавить'                  => 'Add',
     'Отмена'                    => 'Cancel',
     'Редактировать'             => 'Edit',
     'Удалить'                   => 'Delete',
+    'Закрыть'                   => 'Close',
 
     'Удалить нельзя'            => 'Remove impossible',
     'Скрыть / Показать'         => 'Hide / Show',
@@ -112,7 +112,15 @@ return array(
     'Чекбокс'                   => 'Checkbox',
     'Изображения по умолчанию'  => 'Default images',
 
+    'Статистика посещаемости'   => 'Attendance statistics',
+    'статистика предоставлена сервисом <a href="https://metrika.yandex.ru/dashboard?id=42744419" target="_blank">Яндекс.Метрика</a>'   => 'Statistics are provided by the service <a href="https://metrika.yandex.ru/dashboard?id=42744419" target="_blank">Yandex.Metrics</a>',
     'за последний месяц'        => 'for the last month',
-    'Посещаемость страницы'     => 'Page Attendance'
+    'Посещаемость страницы'     => 'Page Attendance',
+    'Статистика страницы'       => 'Page Statistics',
+    'Переход на страницу'       => 'Go to page',
+    'Популярные страницы'       => 'Featured Pages',
+    'Визиты'                    => 'Visits',
+    'Просмотры'                 => 'Views',
+    'Сводная статистика'        => 'Summary statistics'
 
 );

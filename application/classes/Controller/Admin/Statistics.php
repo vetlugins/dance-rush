@@ -12,7 +12,7 @@ class Controller_Admin_Statistics extends Controller_Admin_Common {
         $this->page = array(
             'icon'=>'fa-signal',
             'title' => __('Статистика посещаемости'),
-            'description' => __('статистика предоставлена сервисом Яндекс.Метрика')
+            'description' => __('статистика предоставлена сервисом <a href="https://metrika.yandex.ru/dashboard?id=42744419" target="_blank">Яндекс.Метрика</a>')
         );
 
         $this->template->plugin_specific = array(

@@ -18,15 +18,16 @@
         <div class="box">
             <div class="box-title">
                 <i class="fa fa-thumb-tack"></i>
-                <h3><?php echo __('Адрес страницы') ?></h3>
+                <h3><?php echo __('Популярные страницы') ?></h3>
             </div>
             <div class="box-body no-padding" style="height:393px; overflow: auto">
                 <table class="table table-responsive" style="width: 100%;">
                     <thead>
                         <tr>
-                            <th>URL страницы</th>
-                            <th class="text-center"><i class="fa fa-eye" title="Просмотры" data-toggle="tooltip"></i></th>
-                            <th class="text-center"><i class="fa fa-users" title="Визиты" data-toggle="tooltip"></i></th>
+                            <th><?php echo __('URL страницы') ?></th>
+                            <th></th>
+                            <th class="text-center"><i class="fa fa-eye" title="<?php echo __('Просмотры') ?>" data-toggle="tooltip"></i></th>
+                            <th class="text-center"><i class="fa fa-users" title="<?php echo __('Визиты') ?>" data-toggle="tooltip"></i></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,7 +35,8 @@
 
                         foreach($metrics['pages'] as $value){
                             echo '<tr>
-                                    <td style="word-break:break-all; width: 70%"><a class="select-page" data-id="'.$value['id'].'" href="#" data-toggle="tooltip" title="Посмотреть статистику страницы">'.$value['page'].'</a> <a href="'.$value['page'].'" target="_blank" title="Переход на страницу" data-toggle="tooltip"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
+                                    <td style="word-break:break-all; width: 60%"><a class="select-page" data-id="'.$value['id'].'" href="#" data-toggle="tooltip" title="'.__('Статистика страницы').'">'.$value['page'].'</a></td>
+                                    <td style="width: 10%" class="text-center"><a href="'.$value['page'].'" target="_blank" title="'.__('Переход на страницу').'" data-toggle="tooltip"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
                                     <td style="width: 15%" class="text-center">'.$value['views'].'</td>
                                     <td style="width: 15%" class="text-center">'.$value['visits'].'</td>
                                   </tr>';
@@ -61,7 +63,7 @@
                 <div id="chart-page" style="height: 372px; margin: 0 auto"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal"><?php echo __('Закрыть') ?></button>
             </div>
         </div>
     </div>
