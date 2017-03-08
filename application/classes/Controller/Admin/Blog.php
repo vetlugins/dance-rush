@@ -82,7 +82,7 @@ class Controller_Admin_Blog extends Controller_Admin_Common {
 
         foreach($this->languages as $lang){
 
-            $get_items = $model->where_soft()->lang($lang->i18n)->find_all();
+            $get_items = $model->where_soft()->order_by('id','DESC')->lang($lang->i18n)->find_all();
 
             $list = '';
 
