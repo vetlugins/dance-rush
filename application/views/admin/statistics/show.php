@@ -57,7 +57,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel"><?php echo __('Посещаемость страницы') ?> <span id="pageTitle"></span></h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body no-padding">
                 <div id="chart-page" style="height: 372px; margin: 0 auto"></div>
             </div>
             <div class="modal-footer">

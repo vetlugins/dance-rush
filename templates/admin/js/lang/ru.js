@@ -54,3 +54,10 @@ var video = {
         }
     }
 };
+
+var statistics = {
+    'views': 'Просмотры',
+    'visits': 'Визиты',
+    'max': 'Максимум',
+    'min': 'Минимум'
+};

@@ -12,13 +12,14 @@ $(document).ready(function(){
 
                var obj = $.parseJSON(data),
                    width = $('#pageStat').find('.modal-dialog').width(),
-                   views = obj.views;
+                   views = [obj.views],
+                   visits = [obj.visits];
+
+               console.log(views);
 
                $('#pageStat').find('#pageTitle').html(obj.page);
 
                $('#chart-page').css('width',width+'px');
-
-               console.log(views);
 
                echarts.init(document.getElementById('chart-page')).setOption( {
                    grid:{
@@ -31,7 +32,7 @@ $(document).ready(function(){
                        trigger: 'axis'
                    },
                    legend: {
-                       data:['Визиты','Просмотры']
+                       data:[statistics.visits,statistics.views]
                    },
                    calculable : true,
                    xAxis : [
@@ -70,34 +71,34 @@ $(document).ready(function(){
                ],
                    series : [
                    {
-                       name:'Визиты',
+                       name:statistics.visits,
                        type:'line',
-                       data:[0,0,0,0,2,19,12,8,7,7,4,5,5,8,4,4,6,0,1,6,3,4,3,1,2,5,5,10,3,2],
-                   markPoint : {
-                   data : [
-                       {type : 'max', name: 'Максимум'},
-                       {type : 'min', name: 'Минимум'}
-                   ]
-               },
-               color: ['#97cc64']
-               },
-               {
-                   name:'Просмотры',
-                       type:'line',
-                   data:[0,0,0,0,15,52,22,14,43,16,19,9,10,14,8,21,41,0,6,27,6,6,12,1,3,30,57,50,17,5],
-                   markPoint : {
+                       data:visits,
+                       markPoint : {
                        data : [
-                           {type : 'max', name: 'Максимум'},
-                           {type : 'min', name: 'Минимум'}
+                           {type : 'max', name: statistics.max},
+                           {type : 'min', name: statistics.min}
                        ]
                    },
-                   color: ['#ffd963']
-               }
+                   color: ['#97cc64']
+                   },
+                   {
+                       name:statistics.views,
+                           type:'line',
+                           data:views,
+                           markPoint : {
+                               data : [
+                                   {type : 'max', name: statistics.max},
+                                   {type : 'min', name: statistics.min}
+                               ]
+                           },
+                           color: ['#ffd963']
+                   }
+               ]
+           });
 
-            ]
-   });
+           $('#pageStat').modal('show');
 
-               $('#pageStat').modal('show');
            }
        });
 
