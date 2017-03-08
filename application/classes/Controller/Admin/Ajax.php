@@ -327,5 +327,22 @@ class Controller_Admin_Ajax extends Controller{
         }
     }
 ////////////////////////////////////////////////////////////////////////////////
+    public function action_statistics(){
+
+        $date = date("Y-m-d",time()-2629744);
+
+        $metrics_pages =  Metrica::factory([
+            'date1' => $date,
+            'metrics' => 'ym:pv:pageviews,ym:pv:users',
+            'preset' => 'popular',
+            'dimensions' => 'ym:pv:URLHash'
+        ]);
+
+        $pages = $metrics_pages->pages($_POST['id']);
+
+        $data = json_encode($pages);
+
+        echo $data;
+    }
 }
 ?>

@@ -110,6 +110,8 @@ return array(
     'Тип'                       => 'Type',
     'Текстовый'                 => 'Text',
     'Чекбокс'                   => 'Checkbox',
-    'Изображения по умолчанию'  => 'Default images'
+    'Изображения по умолчанию'  => 'Default images',
+
+    'за последний месяц'        => 'for the last month'
 
 );

@@ -30,15 +30,20 @@ class Controller_Admin_Statistics extends Controller_Admin_Common {
             array('current' => __('Главная'))
         );
 
-        $metrica = Metrica::factory(['date1' => '10dasAgo']);
-        $visits = $metrica->visits(0,true);
-        $views  = $metrica->visits(1,true);
-        $users  = $metrica->visits(2,true);
+        $date = date("Y-m-d",time()-2629744);
+
+        $metrics_visits = Metrica::factory(['date1' => $date]);
+        $visits = $metrics_visits->visits(0,true);
+        $views  = $metrics_visits->visits(1,true);
+        $users  = $metrics_visits->visits(2,true);
+
+        $metrics_pages =  Metrica::factory(['date1' => $date,'metrics' => 'ym:pv:pageviews,ym:pv:users','preset' => 'popular','dimensions' => 'ym:pv:URLHash']);
 
         $metrics = [
             'visits' => $visits,
             'views' => $views,
-            'users' => $users
+            'users' => $users,
+            'pages' => $metrics_pages->pages()
         ];
 
         $content = View::factory('/admin/'.$this->params['module'].'/show')->bind('metrics',$metrics);

@@ -14,7 +14,7 @@ class Kohana_Metrica extends Kohana_MetricaRequest {
 
     public static function factory(array $params = array() ){
 
-        return new Metrica($params = array());
+        return new Metrica($params);
     }
 
     public function visits($key,$charts=false){
@@ -51,6 +51,48 @@ class Kohana_Metrica extends Kohana_MetricaRequest {
         }else{
             return $this->errors($this->errors);
         }
+    }
+
+    public function pages($id = ''){
+
+        $data = array();
+
+        if(empty($id)){
+            foreach($this->data['data'] as $k=>$value){
+
+                $views = 0;
+                foreach($value['metrics'][0] as $val) $views += $val;
+
+                $visits = 0;
+                foreach($value['metrics'][1] as $val) $visits += $val;
+
+                $data[] = [
+                    'page' => $value['dimensions'][0]['name'],
+                    'views' => $views,
+                    'visits' => $visits,
+                    'id' => $value['dimensions'][0]['id']
+                ];
+            }
+
+        }else{
+
+            $date = $this->data['time_intervals'] ?: [];
+
+            foreach($this->data['data'] as $k=>$value){
+
+                if($id == $value['dimensions'][0]['id']){
+
+                    $data = [
+                        'page' => $value['dimensions'][0]['name']
+                    ];
+                }
+
+            }
+
+        }
+
+        return $data;
+
     }
 
     public function gender($key,$gender,$charts=false){
@@ -96,5 +138,7 @@ class Kohana_Metrica extends Kohana_MetricaRequest {
             return $this->errors($this->errors);
         }
     }
+
+
 
 }
