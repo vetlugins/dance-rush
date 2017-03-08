@@ -28,7 +28,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-    <?php  include('_includes/_counter.php'); ?>
+    <?php if (Kohana::$config->load('data.status') == 'published') include('_includes/_counter.php'); ?>
 
 </head>
 <body>
