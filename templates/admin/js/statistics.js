@@ -12,10 +12,12 @@ $(document).ready(function(){
 
                var obj = $.parseJSON(data),
                    width = $('#pageStat').find('.modal-dialog').width(),
-                   views = [obj.views],
-                   visits = [obj.visits];
+                   views = JSON.stringify(obj.views),
+                   views = views.replace(/"/g),
+                   visits = JSON.stringify(obj.visits),
+                   visits = visits.replace(/"/g);
 
-               console.log(views);
+                console.log(visits);
 
                $('#pageStat').find('#pageTitle').html(obj.page);
 
@@ -96,6 +98,8 @@ $(document).ready(function(){
                    }
                ]
            });
+
+
 
            $('#pageStat').modal('show');
 

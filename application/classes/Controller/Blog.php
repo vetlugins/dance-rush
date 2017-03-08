@@ -55,7 +55,7 @@ class Controller_Blog extends Controller_Common {
 
             $fixed = ORM::factory('Blog_Article')->where('lang','=',$this->lang)->and_where('view','=',1)->and_where('fixed','=',1)->order_by('id','DESC')->where_soft()->find_all();
 
-            $posts = ORM::factory('Blog_Article')->where('lang','=',$this->lang)->and_where('view','=',1)->order_by('id','DESC')->where_soft()->find_all();
+            $posts = ORM::factory('Blog_Article')->where('lang','=',$this->lang)->and_where('view','=',1)->order_by('date','DESC')->where_soft()->find_all();
 
             $article_fixed  = count($fixed) ? View::factory( Kohana::$config->load('site.theme').'/'.$this->data->url.'/_snippets/_fixed')->bind('posts',$fixed) : '';
             $article_latest = View::factory( Kohana::$config->load('site.theme').'/'.$this->data->url.'/_snippets/_posts')->bind('posts',$posts);

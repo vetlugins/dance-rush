@@ -78,14 +78,14 @@ class Kohana_Metrica extends Kohana_MetricaRequest {
 
             foreach($this->data['data'] as $k=>$value){
 
-                $visits = '';
-                $views = '';
+                $visits = [];
+                $views = [];
                 $date = [];
 
                 if($id == $value['dimensions'][0]['id']){
 
-                    foreach($value['metrics'][1] as $val) $visits  .= $val.',';
-                    foreach($value['metrics'][0] as $val) $views .= $val.',';
+                    foreach($value['metrics'][1] as $val) $visits[]  = $val;
+                    foreach($value['metrics'][0] as $val) $views[] = $val;
 
                     foreach($this->data['time_intervals'] as $key=>$dates){
                         foreach($dates as $d) $date[] = $d;

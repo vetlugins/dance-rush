@@ -21,7 +21,7 @@
                 <h3><?php echo __('Адрес страницы') ?></h3>
             </div>
             <div class="box-body no-padding" style="height:393px; overflow: auto">
-                <table class="table table-responsive" style="width: 100%">
+                <table class="table table-responsive" style="width: 100%;">
                     <thead>
                         <tr>
                             <th>URL страницы</th>
