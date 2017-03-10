@@ -23,7 +23,7 @@ var page = {
 
 var news = {
     'alert': {
-        'delete': 'Удалить эту сатью'
+        'delete': 'Удалить эту статью'
     }
 };
 

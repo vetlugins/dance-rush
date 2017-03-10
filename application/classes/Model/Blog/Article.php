@@ -41,6 +41,7 @@ class Model_Blog_Article extends ORM{
 	}
 
 
+
 	public function article($url,$lang){
 
 		$article = $this->where('lang', '=', $lang)
