@@ -39,11 +39,27 @@ class Controller_Admin_Statistics extends Controller_Admin_Common {
 
         $metrics_pages =  Metrica::factory(['date1' => $date,'metrics' => 'ym:pv:pageviews,ym:pv:users','preset' => 'popular','dimensions' => 'ym:pv:URLHash']);
 
+        $metrics_gender = Metrica::factory(['date1' => $date,'metrics' => 'ym:s:visits','dimensions' => 'ym:s:gender']);
+        $gender = $metrics_gender->gender();
+
+        $metrics_age = Metrica::factory(['date1' => $date,'dimensions' => 'ym:s:ageInterval']);
+        $age = $metrics_age->age();
+
+        $metrics_day_week = Metrica::factory(['date1' => $date,'metrics' => 'ym:s:visits','dimensions' => 'ym:s:dayOfWeek']);
+        $day_week = $metrics_day_week->day_week();
+
+        $metrics_exemption = Metrica::factory(['date1' => $date,'metrics' => 'ym:s:visits','dimensions' => 'ym:s:bounce']);
+        $exemption = $metrics_exemption->exemption();
+
         $metrics = [
             'visits' => $visits,
             'views' => $views,
             'users' => $users,
-            'pages' => $metrics_pages->pages()
+            'pages' => $metrics_pages->pages(),
+            'gender' => $gender,
+            'age' => $age,
+            'day_week' => $day_week,
+            'exemption' => $exemption
         ];
 
         $content = View::factory('/admin/'.$this->params['module'].'/show')->bind('metrics',$metrics);

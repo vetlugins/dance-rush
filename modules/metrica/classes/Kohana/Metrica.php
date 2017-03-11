@@ -109,50 +109,174 @@ class Kohana_Metrica extends Kohana_MetricaRequest {
 
     }
 
-    public function gender($key,$gender,$charts=false){
+    public function gender(){
 
-        if(!$this->errors){
-            $date = $this->data['time_intervals'] ?: [];
-            $dimensions = $this->data['data'][$gender]['dimensions'][0]['name'];
-            $metrics = $this->data['data'][$gender]['metrics'][$key] ?: [];
+        $error = '';
+
+        if(empty($this->data['data'])){
+            $error = 'За выбранный период времени ничего не найдено';
+        }
+
+        if(empty($error)){
 
             $data = array();
 
-            foreach($date as $k=>$v){
-                if(array_key_exists  ($k,$metrics)) {
-                    if($k != 0) $data[$dimensions][] = [$v[1] => $metrics[$k]];
-                }
-            }
-
-            if($charts === true){
-
-                $female = $this->gender(0,0);
-                $male = $this->gender(0,1);
-
-                $gender = array_merge($female,$male);
-
-                $gender_name = '';
-                $gender_data = '';
-
-                foreach($gender as $key=>$value){
-                    $total = 0;
-                    $gender_name .= "'".$key."',";
-                    foreach($value as $val){
-                        foreach($val as $v){
-                            $total += $v;
-                        }
+            foreach($this->data['data'] as $key=>$value){
+                foreach($value['dimensions'] as $val){
+                    $i = 0;
+                    foreach($val as $v){
+                        if($i == 0) $data[$v] = $value['metrics'];
+                        $i++;
                     }
-                    $gender_data .= "{value:".$total.", name:'".$key."'},";
                 }
-                return $chart = array('name'=> $gender_name,'data'=>$gender_data);
             }
 
-            return $data;
+            $gender_name = '';
+            $gender_data = '';
+            $num = 0;
+
+            foreach($data as $key => $value){
+                $total = 0;
+                $gender_name .= "'".$key."',";
+                foreach($value[0] as $t) $total += $t;
+
+                $num += $total;
+
+                if($total > 0) $gender_data .= "{value:".$total.", name:'".$key."'},";
+            }
+
+            if($num > 0) return $chart = array('name'=> $gender_name,'data'=>$gender_data);
+            else return $error = 'За выбранный период времени ничего не найдено';
+
         }else{
-            return $this->errors($this->errors);
+            return $error;
         }
     }
 
+    public function age(){
 
+        $error = '';
+
+        if(empty($this->data['data'])){
+            $error = 'За выбранный период времени ничего не найдено';
+        }
+
+        if(empty($error)){
+            $data = array();
+
+            foreach($this->data['data'] as $key=>$value){
+                foreach($value['dimensions'] as $val){
+                    $i = 0;
+                    foreach($val as $v){
+                        if($i == 0) $data[$v] = $value['metrics'];
+                        $i++;
+                    }
+                }
+            }
+
+            $age_name = '';
+            $age_data = '';
+            $num = 0;
+
+            foreach($data as $key => $value){
+                $total = 0;
+                $age_name .= "'".$key."',";
+
+                foreach($value[0] as $t) $total += $t;
+
+                $num += $total;
+
+                if($total > 0) $age_data .= "{value:".$total.", name:'".$key."'},";
+            }
+
+            if($num > 0) return $chart = array('name'=> $age_name,'data'=>$age_data);
+            else return $error = 'За выбранный период времени ничего не найдено';
+
+        }else{
+            return $error;
+        }
+
+    }
+
+    public function day_week(){
+
+        $error = '';
+
+        if(empty($this->data['data'])){
+            $error = 'За выбранный период времени ничего не найдено';
+        }
+
+        if(empty($error)){
+
+            $data = array();
+            foreach($this->data['data'] as $v){
+                $total = 0;
+                foreach($v['metrics'][0] as $value){
+                    if($value > 0){
+                        $total += $value;
+                    }
+                }
+
+                $data[$v['dimensions'][0]['name']] = $total;
+            }
+
+            $day_week_days = '';
+            $day_week_data = '';
+
+            foreach($data as $key=>$value){
+                $day_week_days .= "'".$key."',";
+                $day_week_data .= "{value:".$value.", name:'".$key."'},";
+            }
+
+            return $chart = array('days' => $day_week_days,'data'=>$day_week_data);
+
+        }else{
+            return $error;
+        }
+    }
+
+    public function exemption(){
+
+        $error = '';
+
+        if(empty($this->data['data'])){
+            $error = 'За выбранный период времени ничего не найдено';
+        }
+
+        if(empty($error)){
+
+            $data = array();
+
+            foreach($this->data['data'] as $key=>$value){
+                foreach($value['dimensions'] as $val){
+                    $i = 0;
+                    foreach($val as $v){
+                        if($i == 0) $data[$v] = $value['metrics'];
+                        $i++;
+                    }
+                }
+            }
+
+            $exemption_name = '';
+            $exemption_data = '';
+
+            foreach($data as $key => $value){
+                $total = 0;
+                $k = '';
+                if($key == 'no') $k = 'Без отказов';
+                if($key == 'yes') $k = 'Отказы';
+
+                $exemption_name .= "'$k',";
+                foreach($value[0] as $t) $total += $t;
+
+
+                $exemption_data .= "{value:".$total.", name:'".$k."'},";
+            }
+
+            return $chart = array('name'=> $exemption_name,'data'=>$exemption_data);
+        }else{
+            return $error;
+        }
+    }
 
 }

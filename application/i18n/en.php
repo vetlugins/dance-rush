@@ -121,6 +121,10 @@ return array(
     'Популярные страницы'       => 'Featured Pages',
     'Визиты'                    => 'Visits',
     'Просмотры'                 => 'Views',
-    'Сводная статистика'        => 'Summary statistics'
+    'Сводная статистика'        => 'Summary statistics',
+    'Пол'                       => 'Gender',
+    'Возраст'                   => 'Age',
+    'Количество визитов по дням недели' => 'Number of visits by days of the week',
+    'Отказность'                => 'Exemption'
 
 );

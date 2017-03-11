@@ -50,6 +50,56 @@
 
     <div class="clearfix"></div>
 
+    <div class="col-lg-4">
+        <div class="box">
+            <div class="box-title">
+                <i class="fa fa-venus-mars" aria-hidden="true"></i>
+                <h3><?php echo __('Пол') ?></h3>
+            </div>
+            <div class="box-body no-padding" style="height:393px; overflow: auto">
+                <div id="chart-gender" style="width: 100%; height: 372px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="box">
+            <div class="box-title">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <h3><?php echo __('Возраст') ?></h3>
+            </div>
+            <div class="box-body no-padding" style="height:393px; overflow: auto">
+                <div id="chart-age" style="width: 100%; height: 372px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="col-lg-8">
+        <div class="box">
+            <div class="box-title">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <h3><?php echo __('Количество визитов по дням недели') ?></h3>
+            </div>
+            <div class="box-body no-padding" style="height:393px; overflow: auto">
+                <div id="chart-day-week" style="width: 100%; height: 372px"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="box">
+            <div class="box-title">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <h3><?php echo __('Отказность') ?></h3>
+            </div>
+            <div class="box-body no-padding" style="height:393px; overflow: auto">
+                <div id="chart-exemption" style="width: 100%; height: 372px"></div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <div class="modal fade" id="pageStat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -173,6 +223,124 @@
                 color: ['#fd5a3e']
             }
 
+        ]
+    });
+
+    echarts.init(document.getElementById('chart-gender')).setOption( {
+        title : {
+            subtext: '',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c}({d}%)"
+        },
+        legend: {
+            orient : 'vertical',
+            x : 'left',
+            data: [<?php echo $metrics['gender']['name'] ?>]
+        },
+
+        calculable : true,
+        series : [
+            {
+                name:'Всего визитов',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '50%'],
+                color: colors,
+                data:[
+                    <?php echo $metrics['gender']['data'] ?>
+                ]
+            }
+        ]
+    });
+
+    echarts.init(document.getElementById('chart-age')).setOption( {
+        title : {
+            subtext: '',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c}({d}%)"
+        },
+        legend: {
+            orient : 'vertical',
+            x : 'left',
+            data: [<?php echo $metrics['age']['name'] ?>]
+        },
+
+        calculable : true,
+        series : [
+            {
+                name:'Всего визитов',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '50%'],
+                color: colors,
+                data:[
+                    <?php echo $metrics['age']['data'] ?>
+                ]
+            }
+        ]
+    });
+
+    echarts.init(document.getElementById('chart-day-week')).setOption( {
+        title : {
+            subtext: '',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c}({d}%)"
+        },
+        legend: {
+            orient : 'vertical',
+            x : 'left',
+            data: [<?php echo $metrics['day_week']['days'] ?>]
+        },
+
+        calculable : true,
+        series : [
+            {
+                name:'Всего визитов',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '50%'],
+                color: colors,
+                data:[
+                    <?php echo $metrics['day_week']['data'] ?>
+                ]
+            }
+        ]
+    });
+
+    echarts.init(document.getElementById('chart-exemption')).setOption( {
+        title : {
+            subtext: '',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c}({d}%)"
+        },
+        legend: {
+            orient : 'vertical',
+            x : 'left',
+            data: [<?php echo $metrics['exemption']['name'] ?>]
+        },
+
+        calculable : true,
+        series : [
+            {
+                name:'Всего визитов',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '50%'],
+                color: colors,
+                data:[<?php echo $metrics['exemption']['data'] ?>]
+            }
         ]
     });
 
