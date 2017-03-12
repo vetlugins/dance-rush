@@ -136,7 +136,12 @@ return array(
     'Мои письма'                => 'My letters',
     'Выход'                     => 'Exit',
     'Панель управления'         => 'Dashboard',
-    'Вы здесь'                  => 'Are you here'
+    'Вы здесь'                  => 'Are you here',
 
+    'Пользователи сайта'        => 'Site Users',
+    'управление пользователями сайта' => 'management of users of the site',
+    'Список пользователей сайта' => 'List of users of the site',
+    'Имя пользователя'          => 'Username',
+    'Авторизаций'               => 'Authorizations'
 
 );

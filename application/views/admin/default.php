@@ -132,44 +132,50 @@
                     </a>
                 </li>
 
-                <li <?php if($params['module'] == 'pages') echo 'class="active"'; ?>>
-                    <a href="<?php echo $params['url_site_admin'] ?>/pages">
-                        <i class="fa fa-sitemap"></i> <span>Страницы сайта</span>
-                    </a>
-                </li>
-                <li class="sub-nav <?php if($params['module'] == 'blog') echo ' active'; ?>">
-                    <a href="#">
-                        <i class="fa fa-book"></i>
-                        <span>Блог</span>
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li><a href="<?php echo $params['url_site_admin'] ?>/blog/category">Категории</a></li>
-                        <li><a href="<?php echo $params['url_site_admin'] ?>/blog/article">Статьи</a></li>
-                    </ul>
-                </li>
-                <li <?php if($params['module'] == 'photo') echo 'class="active"'; ?>>
-                    <a href="<?php echo $params['url_site_admin'] ?>/photo">
-                        <i class="fa fa-photo"></i> <span>Фотогалерея</span>
-                    </a>
-                </li>
-                <li <?php if($params['module'] == 'video') echo 'class="active"'; ?>>
-                    <a href="<?php echo $params['url_site_admin'] ?>/video">
-                        <i class="fa fa-film"></i> <span>Видеогалерея</span>
-                    </a>
-                </li>
-                <li class="sub-nav <?php if($params['module'] == 'site_content') echo ' active'; ?>">
+                <li class="sub-nav <?php
+                    if(
+                        $params['module'] == 'site_content' or
+                        $params['module'] == 'pages' or
+                        $params['module'] == 'blog' or
+                        $params['module'] == 'photo' or
+                        $params['module'] == 'video'
+                    ) echo ' active';
+                ?>">
                     <a href="#">
                         <i class="fa fa-briefcase"></i>
                         <span>Контент сайта</span>
                         <i class="fa fa-angle-right pull-right"></i>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="<?php echo $params['url_site_admin'] ?>/site_content/choreographers">Хореографы</a></li>
-                        <li><a href="<?php echo $params['url_site_admin'] ?>/site_content/services">Услуги</a></li>
-                        <li><a href="<?php echo $params['url_site_admin'] ?>/site_content/prices">Цены</a></li>
+                        <li <?php if($params['module'] == 'pages') echo 'class="active"'; ?>>
+                            <a href="<?php echo $params['url_site_admin'] ?>/pages">
+                                <i class="fa fa-sitemap"></i> <span>Страницы сайта</span>
+                            </a>
+                        </li>
+                        <li class="sub-nav <?php if($params['module'] == 'blog') echo ' active'; ?>">
+                            <a href="#">
+                                <i class="fa fa-book"></i>
+                                <span>Блог</span>
+                                <i class="fa fa-angle-right pull-right"></i>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="<?php echo $params['url_site_admin'] ?>/blog/category">Категории</a></li>
+                                <li><a href="<?php echo $params['url_site_admin'] ?>/blog/article">Статьи</a></li>
+                            </ul>
+                        </li>
+                        <li <?php if($params['module'] == 'photo') echo 'class="active"'; ?>>
+                            <a href="<?php echo $params['url_site_admin'] ?>/photo">
+                                <i class="fa fa-photo"></i> <span>Фотогалерея</span>
+                            </a>
+                        </li>
+                        <li <?php if($params['module'] == 'video') echo 'class="active"'; ?>>
+                            <a href="<?php echo $params['url_site_admin'] ?>/video">
+                                <i class="fa fa-film"></i> <span>Видеогалерея</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
+
                 <li <?php if($params['module'] == 'users') echo 'class="active"'; ?>>
                     <a href="<?php echo $params['url_site_admin'] ?>/users">
                         <i class="fa fa-users"></i> <span>Пользователи</span>

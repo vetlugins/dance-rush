@@ -30,6 +30,9 @@ foreach($config->languages as $lang => $settings)
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+// Пользователи сайта
+Route::set('admin-users', 'admin/users')->defaults(['directory'  => 'Admin','controller' => 'Users']);
+
 //Статистика сайта
 Route::set('admin-statistics', 'admin/statistics')->defaults(array('directory'  => 'Admin','controller' => 'Statistics'));
 
