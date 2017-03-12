@@ -46,7 +46,10 @@ class Controller_Admin_Users extends Controller_Admin_Common {
         $list_users = '';
 
         foreach($users as $user){
-            $list_users .= View::factory('/admin/'.$this->params['module'].'/list')->bind('user',$user);
+
+            $visit = $user->visit->order_by('id','DESC')->find();
+
+            $list_users .= View::factory('/admin/'.$this->params['module'].'/list')->bind('user',$user)->bind('visit',$visit);
         }
 
         $this->template->content = View::factory('/admin/'.$this->params['module'].'/all')
