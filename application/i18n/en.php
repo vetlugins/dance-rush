@@ -142,6 +142,7 @@ return array(
     'управление пользователями сайта' => 'management of users of the site',
     'Список пользователей сайта' => 'List of users of the site',
     'Имя пользователя'          => 'Username',
-    'Авторизаций'               => 'Authorizations'
+    'Авторизаций'               => 'Authorizations',
+    'Последняя авторизация'     => 'Last authorization'
 
 );

@@ -16,6 +16,7 @@
                             <th><?php echo __('Имя пользователя') ?></th>
                             <th><?php echo __('Email') ?></th>
                             <th><?php echo __('Авторизаций') ?></th>
+                            <th><?php echo __('Последняя авторизация') ?></th>
                         </tr>
                     </thead>
                     <tbody>
