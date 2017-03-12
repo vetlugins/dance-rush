@@ -143,6 +143,12 @@ return array(
     'Список пользователей сайта' => 'List of users of the site',
     'Имя пользователя'          => 'Username',
     'Авторизаций'               => 'Authorizations',
-    'Последняя авторизация'     => 'Last authorization'
+    'Последняя авторизация'     => 'Last authorization',
+    'Фотография'                => 'Photo',
+    'Новый пользователь'        => 'New user',
+    'Фотография отсутствует'    => 'No photo',
+    'Телефон'                   => 'Phone',
+    'Город'                     => 'City',
+    'О пользователе'            => 'About User'
 
 );

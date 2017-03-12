@@ -204,4 +204,16 @@ class Model_Auth_User extends ORM {
 		return $this->values($values, $expected)->update($extra_validation);
 	}
 
+	/*
+	 * Photo user
+	 */
+	public function cover(){
+		$cover = ORM::factory('Covers')->where('object_type','=','user')->and_where('object_id','=',$this->id)->and_where('coverable','=',1)->find();
+		if($cover->loaded()){
+			return $cover->name;
+		}else{
+			return $cover = '';
+		}
+	}
+
 } // End Auth User Model

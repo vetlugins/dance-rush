@@ -158,32 +158,22 @@ class Controller_Admin_Users extends Controller_Admin_Common {
     public function action_edit()
     {
         $model = ORM::factory($this->params['model']);
+        $id = $this->request->param('id');
+        $user = $model->where('id','=',$id)->find();
 
         $this->page['breadcrumb'] = array(
             array($this->params['url_site_admin'] => __('Главная')),
-            array($this->params['url_site_admin'].'/'.$this->params['module'] => __('Параметры')),
-            array('current' => __('Редактирование параметра'))
+            array($this->params['url_site_admin'].'/'.$this->params['module'] => __('Пользователи сайта')),
+            array('current' => $user->username)
         );
-
-        $id = $this->request->param('id');
-        $name = $this->request->param('name');
 
         if(Session::instance()->get('alert')) $alert = Session::instance()->get_once('alert');
         else $alert = '';
 
-        if($id and $name){
-
-            $item = $model->where('section','=',$id)->and_where('name','=',$name)->find();
-
-        }else{
-            $alert = '<div class="alert alert-danger"><p>'.__('Нет элементов для отображения').'</p></div>';
-        }
-
         $this->template->content = View::factory('/admin/'.$this->params['module'].'/edit')
-            ->bind('id',$id)
-            ->bind('name',$name)
-            ->bind('item',$item)
-            ->bind('alert',$alert);
+            ->bind('alert',$alert)
+            ->bind('item',$user)
+            ->bind('id',$id);
     }
 
     public function action_update()
