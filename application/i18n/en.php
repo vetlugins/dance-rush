@@ -125,6 +125,18 @@ return array(
     'Пол'                       => 'Gender',
     'Возраст'                   => 'Age',
     'Количество визитов по дням недели' => 'Number of visits by days of the week',
-    'Отказность'                => 'Exemption'
+    'Отказность'                => 'Exemption',
+
+    'Переключатель навигации'   => 'Navigation Switch',
+    'Панель быстрого доступа'   => 'Quick Access Toolbar',
+    'Всего уведомлений'         => 'Total notifications',
+    'На Сайт'                   => 'Go to WebSite',
+    'Мой профайл'               => 'My profile',
+    'Мои настройки'             => 'My settings',
+    'Мои письма'                => 'My letters',
+    'Выход'                     => 'Exit',
+    'Панель управления'         => 'Dashboard',
+    'Вы здесь'                  => 'Are you here'
+
 
 );

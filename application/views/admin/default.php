@@ -35,7 +35,7 @@
     <a href="<?php echo URL::site('admin') ?>" class="logo"><i class="fa fa-bolt"></i> <span><?php echo $config->get('title'); ?> <?php echo $config->get('version'); ?></span></a>
     <nav class="navbar navbar-static-top">
         <a href="#" class="navbar-btn sidebar-toggle" style="margin: -2px 0 !important;">
-            <span class="sr-only"><?php echo Kohana::message('admin', 'titles.default.menu_m_title') ?></span>
+            <span class="sr-only"><?php echo __('Переключатель навигации') ?></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -48,10 +48,10 @@
                         <i class="fa fa-th-large"></i>
                     </a>
                     <ul class="dropdown-menu" style="width: 295px!important; height: 105px!important">
-                        <li class="header"><i class="fa fa-th-large"></i>  <?php echo Kohana::message('admin', 'titles.default.panel_m_title') ?></li>
+                        <li class="header"><i class="fa fa-th-large"></i>  <?php echo __('Панель быстрого доступа') ?></li>
                         <li>
                             <ul class="mega-menu">
-                                <li>
+                                <!--<li>
                                     <a href="/admin/clients/add">
                                         <span><i class="fa fa-users"></i></span>
                                         <span>Новый клиент</span>
@@ -68,7 +68,7 @@
                                         <span><i class="fa fa-book"></i></span>
                                         <span>Добавить новость</span>
                                     </a>
-                                </li>
+                                </li>-->
                             </ul>
                         </li>
                         <li class="footer"></li>
@@ -80,10 +80,9 @@
                         <i class="fa fa-bell"></i><span class="label label-warning"><?php //echo $new_item['i'] ?></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header"><i class="fa fa-bell"></i>  <?php echo Kohana::message('admin', 'titles.default.count_alert') ?> <?php //echo $new_item['i'] ?></li>
+                        <li class="header"><i class="fa fa-bell"></i>  <?php echo __('Всего уведомлений') ?> <?php //echo $new_item['i'] ?></li>
                         <li>
                             <ul>
-                                <li>Тест!!!!!</li>
                                 <?php //echo $new_item['new'] ?>
                             </ul>
                         </li>
@@ -95,7 +94,7 @@
             </ul>
         </div>
         <div class="navbar-right">
-            <a href="<?php echo URL::site() ?>" target="_blank" class="btn btn-primary  btn-outline"  style="padding: 5px 8px; margin: 8px 15px; border-radius: 0"><?php echo Kohana::message('admin', 'titles.default.go_to_site') ?></a>
+            <a href="<?php echo URL::site() ?>" target="_blank" class="btn btn-primary  btn-outline"  style="padding: 5px 8px; margin: 8px 15px; border-radius: 0"><?php echo __('На Сайт') ?></a>
         </div>
     </nav>
 </header>
@@ -117,10 +116,10 @@
                 </div>
                 <div class="profile-btn">
                     <ul>
-                        <li><a href="<?php echo $params['url_site_admin'] ?>/account/<?php echo Auth::instance()->get_user()->login ?>" title="<?php echo Kohana::message('admin', 'titles.default.user_profile') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-user"></i></a></li>
-                        <li><a href="" title="<?php echo Kohana::message('admin', 'titles.default.user_setting') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-gears"></i></a></li>
-                        <li><a href="<?php echo $params['url_site_admin'] ?>/mail/<?php echo Auth::instance()->get_user()->login ?>" title="<?php echo Kohana::message('admin', 'titles.default.user_mail') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-envelope"></i><span class="label label-warning"><?php // echo $new_mail ?></span></a></li>
-                        <li><a href="<?php echo $params['url_site_admin'] ?>/account/logout" title="<?php echo Kohana::message('admin', 'titles.default.user_logout') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-power-off"></i></a></li>
+                        <li><a href="<?php echo $params['url_site_admin'] ?>/account/<?php echo Auth::instance()->get_user()->login ?>" title="<?php echo __('Мой профайл') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-user"></i></a></li>
+                        <li><a href="" title="<?php echo __('Мои настройки') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-gears"></i></a></li>
+                        <li><a href="<?php echo $params['url_site_admin'] ?>/mail/<?php echo Auth::instance()->get_user()->login ?>" title="<?php echo __('Мои письма') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-envelope"></i><span class="label label-warning"><?php // echo $new_mail ?></span></a></li>
+                        <li><a href="<?php echo $params['url_site_admin'] ?>/account/logout" title="<?php echo __('Выход') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-power-off"></i></a></li>
                     </ul>
                     <div class="clearfix"></div>
                 </div>
@@ -129,7 +128,6 @@
             <ul class="sidebar-menu">
                 <li <?php if($params['module'] == 'home') echo 'class="active"'; ?>>
                     <a href="<?php echo $params['url_site_admin'] ?>">
-                        <i class="fa fa-home"></i> <span><?php echo Kohana::message('admin', 'home') ?></span>
                     </a>
                 </li>
 
@@ -171,6 +169,11 @@
                         <li><a href="<?php echo $params['url_site_admin'] ?>/site_content/prices">Цены</a></li>
                     </ul>
                 </li>
+                <li <?php if($params['module'] == 'users') echo 'class="active"'; ?>>
+                    <a href="<?php echo $params['url_site_admin'] ?>/users">
+                        <i class="fa fa-users"></i> <span>Пользователи</span>
+                    </a>
+                </li>
                 <li <?php if($params['module'] == 'params') echo 'class="active"'; ?>>
                     <a href="<?php echo $params['url_site_admin'] ?>/params">
                         <i class="fa fa-gears"></i> <span>Параметры</span>
@@ -198,7 +201,7 @@
             </div>
             <h1><?php if(isset($page)) echo $page['title'] ?> <small><?php if(isset($page)) echo $page['description'] ?></small></h1>
             <ol class="breadcrumb">
-                <li><?php echo Kohana::message('admin', 'titles.default.breadcrumb') ?>:</li>
+                <li><?php echo __('Вы здесь') ?>:</li>
                 <?php
                     if(isset($page)){
                         foreach($page['breadcrumb'] as $breadcrumb) {

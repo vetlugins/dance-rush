@@ -25,9 +25,13 @@ abstract class Controller_Admin_Common extends Controller_Template {
         }
 
         if(isset($_GET['lang']) and !empty($_GET['lang'])){
+            if(Cookie::get('lang')) Cookie::delete('lang');
             I18n::lang($_GET['lang']);
+            Cookie::set('lang','en', Date::YEAR);
+        }else{
+            if(Cookie::get('lang')) I18n::lang(Cookie::get('lang'));
+            else I18n::lang('ru');
         }
-        else I18n::lang('ru');
 
         /*Основные настройки сайта*/
         $this->params = array(
