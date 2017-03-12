@@ -149,6 +149,11 @@ return array(
     'Фотография отсутствует'    => 'No photo',
     'Телефон'                   => 'Phone',
     'Город'                     => 'City',
-    'О пользователе'            => 'About User'
+    'О пользователе'            => 'About User',
+    'Роль'                      => 'Role',
+    'Если роль будет "Администрация", то так же нужно выбрать роль "Авторизированные"' => 'If the role is "Administration", then you also need to select the role "Authorized"',
+    'Если необходимо забанить пользователя выберите роль "Забаненные"' => 'If you want to ban a user, select the role "Banned"',
+    'Активность пользователя'   => 'User activity',
+    'Авторизации'               => 'Authorization'
 
 );

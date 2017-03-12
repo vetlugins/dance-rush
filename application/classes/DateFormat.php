@@ -197,7 +197,7 @@ class DateFormat
             case 'L, d F Y': //где L полное наимнование недели
                 $date = $this->week() . ', ' . $this->day . ' ' . $this->month('full') . ' ' . $this->year;
                 break;
-            case 'd.F.Y в H:i':
+            case 'd F Y в H:i':
                 $date = $this->day . ' ' . $this->month('full') . ' ' . $this->year . ' в ' . $this->hour_24 . ':' . $this->minute;
                 break;
             case 'd M Y H:i':

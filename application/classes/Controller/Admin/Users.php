@@ -21,12 +21,17 @@ class Controller_Admin_Users extends Controller_Admin_Common {
             'bootstrapValidator/bootstrapValidator.min',
             'fancybox/jquery.fancybox',
             'bootstrap-file-input/bootstrap-file-input',
+            'select2/js/select2.min',
+            'inputmask/jquery.inputmask',
+            'datatables/jquery.dataTables',
+            'datatables/dataTables.bootstrap'
         );
         $this->template->styles_specific = array(
             'switchery/switchery.min',
             'jgrowl/jquery.jgrowl',
             'bootstrapValidator/bootstrapValidator.min',
             'fancybox/jquery.fancybox',
+            'select2/css/select2.min'
         );
 
 
@@ -159,7 +164,7 @@ class Controller_Admin_Users extends Controller_Admin_Common {
     {
         $model = ORM::factory($this->params['model']);
         $id = $this->request->param('id');
-        $user = $model->where('id','=',$id)->find();
+        $user = $model->where('login','=',$id)->find();
 
         $this->page['breadcrumb'] = array(
             array($this->params['url_site_admin'] => __('Главная')),
@@ -170,17 +175,51 @@ class Controller_Admin_Users extends Controller_Admin_Common {
         if(Session::instance()->get('alert')) $alert = Session::instance()->get_once('alert');
         else $alert = '';
 
+        $roles = ORM::factory('Auth_Role')->where('name','!=','superadmin')->find_all();
+        $user_roles = $user->roles->find_all();
+
+        $user_roles_array = [];
+        foreach($user_roles as $role){
+            $user_roles_array[$role->id][] = $role->name;
+        }
+
+        $visits = $user->visit->group_by('date')->order_by('id','DESC')->find_all();
+
+        $show_visit = [];
+
+        foreach($visits as $visit){
+
+            $date = date('Y-m-d H:i:s',$visit->date);
+            $date = new DateFormat($date);
+
+            $browser = new Browser($visit->user_agent);
+
+            $show_visit[] = [
+                'ip'             => $visit->ip,
+                'date'           => $date->get_date('d F Y в H:i'),
+                'browser'        => $browser->getBrowser(),
+                'browserVersion' => $browser->getVersion(),
+                'platform'       => $browser->getPlatform()
+            ];
+
+        }
+
         $this->template->content = View::factory('/admin/'.$this->params['module'].'/edit')
             ->bind('alert',$alert)
+            ->bind('roles',$roles)
+            ->bind('user_roles',$user_roles_array)
             ->bind('item',$user)
-            ->bind('id',$id);
+            ->bind('id',$id)
+            ->bind('visits',$show_visit);
     }
 
     public function action_update()
     {
         $model = ORM::factory($this->params['model']);
 
-        $item = $model->where('name','=',$_POST['name'])->find();
+        $id = $this->request->post('login');
+
+        $item = $model->where('login','=',$id)->find();
 
         if($item->loaded()){
 
@@ -189,14 +228,9 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
             $_POST = Arr::map('trim', $_POST);
 
-            if($_POST['type'] == 'text'){
-                $value = Validation::factory($_POST)
-                    ->rule('value', 'not_empty')
-                    ->rule('title', 'not_empty');
-            }else{
-                $value = Validation::factory($_POST)
-                    ->rule('title', 'not_empty');
-            }
+            $value = Validation::factory($_POST)
+                ->rule('username', 'not_empty')
+                ->rule('role', 'not_empty');
 
             if(!$value->check())
             {
@@ -206,17 +240,13 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
             if(!count($errors)){
 
-                if($_POST['type'] == 'checkbox') {
-                    if(isset($_POST['value'])) $_POST['value'] = 1; else $_POST['value'] = 0;
-                }
-
                 $item->values($_POST)->save();
 
                 $alert .= '<div class="alert alert-success"><p>'.__('Запись успешно изменена').'</p></div>';
 
                 Session::instance()->set('alert',$alert);
 
-                HTTP::redirect($this->params['url_site_admin'].'/'.$this->params['module'].'/'.$item->section.'/'.$item->name);
+                HTTP::redirect($this->params['url_site_admin'].'/'.$this->params['module'].'/'.$item->login.'/edit');
 
             }else{
 
@@ -224,7 +254,7 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
                 Session::instance()->set('alert',$alert)->set('item',$_POST);
 
-                HTTP::redirect($this->params['url_site_admin'].'/'.$this->params['module'].'/'.$item->section.'/'.$item->name);
+                HTTP::redirect($this->params['url_site_admin'].'/'.$this->params['module'].'/'.$item->login.'/edit');
             }
 
         }else{

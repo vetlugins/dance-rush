@@ -1,6 +1,7 @@
 <?php
 if(isset($id)) $action = $params['url_site_admin'].'/'.$params['module'].'/update';
 else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
+
 ?>
 <form id="form" action="<?php echo $action ?>" class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
 
@@ -11,26 +12,19 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                 <?php if(!empty($alert)) echo str_replace('validation.url.','',$alert) ?>
             </div>
             <div class="col-md-4">
-                <?php
-                if(!isset($id)){
-                    ?>
-                    <input type="hidden" name="updated_at"  value="<?php echo date('Y-m-d H:i:s') ?>">
-                    <input type="hidden" name="user_updated"  value="<?php echo Auth::instance()->get_user()->id ?>">
-                    <input type="hidden" name="user_created"  value="<?php echo Auth::instance()->get_user()->id ?>">
-                    <button type="submit" name="addNews" class="btn btn-success pull-right" style="margin-left: 10px">
+                <?php if(!isset($id) and !isset($item)){ ?>
+                    <button type="submit" name="addUser" class="btn btn-success pull-right" style="margin-left: 10px">
                         <?php echo __('Добавить') ?>
                     </button>
-                    <a href="<?php echo $params['url_site_admin'] ?>/<?php echo $params['module'] ?>/article" class="btn btn-danger pull-right">
+                    <a href="<?php echo $params['url_site_admin'] ?>/<?php echo $params['module'] ?>" class="btn btn-danger pull-right">
                         <?php echo __('Отмена') ?>
                     </a>
                 <?php }else{ ?>
-                    <input type="hidden" name="id"  value="<?php echo $id ?>">
-                    <input type="hidden" name="updated_at"  value="<?php echo date('Y-m-d H:i:s') ?>">
-                    <input type="hidden" name="user_updated"  value="<?php echo Auth::instance()->get_user()->id ?>">
-                    <button type="submit" name="editNews" class="btn btn-success pull-right" style="margin-left: 10px">
+                    <input type="hidden" name="login" value="<?php echo $item->login ?>">
+                    <button type="submit" name="editUser" class="btn btn-success pull-right" style="margin-left: 10px">
                         <?php echo __('Редактировать') ?>
                     </button>
-                    <a href="<?php echo $params['url_site_admin'] ?>/<?php echo $params['module'] ?>/article" class="btn btn-danger pull-right">
+                    <a href="<?php echo $params['url_site_admin'] ?>/<?php echo $params['module'] ?>" class="btn btn-danger pull-right">
                         <?php echo __('Отмена') ?>
                     </a>
                 <?php } ?>
@@ -41,7 +35,7 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
         <div class="col-md-8">
             <div class="box">
                 <div class="box-title">
-                    <i class="fa fa-user"></i>
+                    <i class="fa fa-address-card-o"></i>
                     <?php
                     if(isset($id) and !empty($item)){
                         echo '<h3>'.$item->username.'</h3>';
@@ -50,26 +44,95 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                 </div>
                 <div class="box-body">
                     <div class="form-group">
-                        <label class="col-md-4" for="username"><?php echo __('Имя пользователя') ?></label>
-                        <div class="col-md-8"><input type="text" name="username" value="<?php if(isset($item)) echo $item->username ?>" id="username" class="form-control" required></div>
+                        <label class="col-md-3 control-label" for="username"><?php echo __('Имя пользователя') ?></label>
+                        <div class="col-md-9"><input type="text" name="username" value="<?php if(isset($item)) echo $item->username ?>" id="username" class="form-control" required></div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4" for="email"><?php echo __('Email') ?></label>
-                        <div class="col-md-8"><input type="email" name="email" value="<?php if(isset($item)) echo $item->email ?>" id="email" class="form-control" <?php if(isset($item) and $item->email != '')echo 'disabled'; else echo 'required'; ?> ></div>
+                        <label class="col-md-3 control-label" for="email"><?php echo __('Email') ?></label>
+                        <div class="col-md-9"><input type="email" name="email" value="<?php if(isset($item)) echo $item->email ?>" id="email" class="form-control" <?php if(isset($item) and $item->email != '')echo 'disabled'; else echo 'required'; ?> ></div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4" for="phone"><?php echo __('Телефон') ?></label>
-                        <div class="col-md-8"><input type="text" name="phone" value="<?php if(isset($item)) echo $item->phone ?>" id="phone" class="form-control"></div>
+                        <label class="col-md-3 control-label" for="phone"><?php echo __('Телефон') ?></label>
+                        <div class="col-md-9"><input type="text" name="phone" data-inputmask="'mask': '+7(999)999-99-99'" value="<?php if(isset($item)) echo $item->phone ?>" id="phone" class="form-control"></div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4" for="city"><?php echo __('Город') ?></label>
-                        <div class="col-md-8"><input type="text" name="city" value="<?php if(isset($item)) echo $item->city ?>" id="city" class="form-control"></div>
+                        <label class="col-md-3 control-label" for="city"><?php echo __('Город') ?></label>
+                        <div class="col-md-9"><input type="text" name="city" value="<?php if(isset($item)) echo $item->city ?>" id="city" class="form-control"></div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4" for="about"><?php echo __('О пользователе') ?></label>
-                        <div class="col-md-8"><textarea name="about" id="about" class="form-control"><?php if(isset($item)) echo $item->about ?></textarea></div>
+                        <label class="col-md-3 control-label" for="about"><?php echo __('О пользователе') ?></label>
+                        <div class="col-md-9"><textarea name="about" id="about" class="form-control"><?php if(isset($item)) echo $item->about ?></textarea></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="role"><?php echo __('Роль') ?></label>
+                        <div class="col-md-9">
+                            <select id="role" name="role[]" multiple class="multiple-roles form-control" required>
+                                <?php
+                                    foreach($roles as $role){
+                                        if(!isset($id)){
+                                            if($role->id == 1) echo '<option value="'.$role->id.'" selected>'.$role->title.'</option>';
+                                            else echo '<option value="'.$role->id.'">'.$role->title.'</option>';
+                                        }else{
+                                            if(array_key_exists($role->id,$user_roles)) echo '<option value="'.$role->id.'" selected>'.$role->title.'</option>';
+                                            else echo '<option value="'.$role->id.'">'.$role->title.'</option>';
+                                        }
+                                    }
+                                ?>
+                            </select>
+                            <p class="help-block"><?php echo __('Если роль будет "Администрация", то так же нужно выбрать роль "Авторизированные"') ?></p>
+                            <p class="help-block"><?php echo __('Если необходимо забанить пользователя выберите роль "Забаненные"') ?></p>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <?php if(isset($id)){ ?>
+            <div class="box">
+                <div class="box-title">
+                    <i class="fa fa-signal"></i>
+                    <h3><?php echo __('Активность пользователя') ?></h3>
+                </div>
+                <div class="box-body no-padding">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#actions" data-toggle="tab"><?php echo __('Действия') ?></a></li>
+                        <li><a href="#authorization" data-toggle="tab"><?php echo __('Авторизации') ?></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active padding" id="actions">...</div>
+                        <div class="tab-pane" id="authorization">
+                            <table id="visits" class="table table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>№</th>
+                                    <th>IP</th>
+                                    <th>Дата</th>
+                                    <th>Браузер</th>
+                                    <th>ОС</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                if(isset($visits)){
+                                    $i = 1;
+                                    foreach($visits as $visit){
+                                        echo '<tr>
+                                                <td>'.$i.'</td>
+                                                <td>'.$visit['ip'].'</td>
+                                                <td>'.$visit['date'].'</td>
+                                                <td>'.$visit['browser'].' '.$visit['browserVersion'].'</td>
+                                                <td>'.$visit['platform'].'</td>
+                                              </tr>';
+
+                                        $i++;
+                                    }
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
             </div>
         </div>
 
@@ -125,15 +188,6 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
 
 
         <div class="clearfix"></div>
-
-
-        <div class="margin-bottom-md">
-            <div class="col-md-8">
-            </div>
-            <div class="col-md-4">
-
-            </div>
-        </div>
 
     </div>
 

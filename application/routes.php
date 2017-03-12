@@ -32,7 +32,9 @@ foreach($config->languages as $lang => $settings)
  */
 // Пользователи сайта
 Route::set('admin-users', 'admin/users')->defaults(['directory'  => 'Admin','controller' => 'Users']);
-Route::set('admin-users-edit', 'admin/users/<id>')->defaults(['directory'  => 'Admin','controller' => 'Users','action' => 'edit']);
+Route::set('admin-users-edit', 'admin/users/<id>/edit')->defaults(['directory'  => 'Admin','controller' => 'Users','action' => 'edit']);
+Route::set('admin-users-update', 'admin/users/update')->defaults(['directory'  => 'Admin','controller' => 'Users','action' => 'update']);
+
 //Статистика сайта
 Route::set('admin-statistics', 'admin/statistics')->defaults(array('directory'  => 'Admin','controller' => 'Statistics'));
 
