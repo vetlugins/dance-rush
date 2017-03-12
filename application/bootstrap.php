@@ -125,14 +125,15 @@ Kohana::$config->attach(new Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	'auth'       => MODPATH.'auth',
-	'cache'      => MODPATH.'cache',
-	'database'   => MODPATH.'database',
-	'image'      => MODPATH.'image',
-	'orm'        => MODPATH.'orm',
-	'settings'   => MODPATH.'settings',
-	'multilang'  => MODPATH.'multilang',
-	'metrica'    => MODPATH.'metrica'
+	'auth'       		 => MODPATH.'auth',
+	'cache'      		 => MODPATH.'cache',
+	'database'   		 => MODPATH.'database',
+	'image'      		 => MODPATH.'image',
+	'orm'        		 => MODPATH.'orm',
+	'settings'   		 => MODPATH.'settings',
+	'multilang'  		 => MODPATH.'multilang',
+	'metrica'    		 => MODPATH.'metrica',
+	'flexiblemigrations' => MODPATH.'flexiblemigrations'
 ));
 
 require 'routes.php';
