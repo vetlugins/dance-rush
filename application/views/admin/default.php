@@ -128,6 +128,7 @@
             <ul class="sidebar-menu">
                 <li <?php if($params['module'] == 'home') echo 'class="active"'; ?>>
                     <a href="<?php echo $params['url_site_admin'] ?>">
+                        <i class="fa fa-home"></i> <span><?php echo __('Главная') ?></span>
                     </a>
                 </li>
 
