@@ -16,6 +16,7 @@ return array(
     'Идентификатор не передан'  => 'ID is not passed',
     'URL (:value) объекта  уже есть в базе' => 'URL (:value) of the object is already in the database',
     ':field должно содержать только буквы'  => ':field must contain only letters',
+    'Данный раздел на стадии разаработки' => 'This section is under development',
 
     'Главная'                   => 'Home',
     'Название'                  => 'Title',
@@ -154,6 +155,12 @@ return array(
     'Если роль будет "Администрация", то так же нужно выбрать роль "Авторизированные"' => 'If the role is "Administration", then you also need to select the role "Authorized"',
     'Если необходимо забанить пользователя выберите роль "Забаненные"' => 'If you want to ban a user, select the role "Banned"',
     'Активность пользователя'   => 'User activity',
-    'Авторизации'               => 'Authorization'
+    'Авторизации'               => 'Authorization',
+    'Смена пароля'              => 'Change Password',
+    'Новый пароль'              => 'New password',
+    'Повторите пароль'          => 'Confirm password',
+    'Установка пароля'          => 'Set password',
+    'Пароль'                    => 'Password',
+    'Логин'                     => 'Login'
 
 );

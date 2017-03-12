@@ -24,7 +24,8 @@ class Controller_Admin_Users extends Controller_Admin_Common {
             'select2/js/select2.min',
             'inputmask/jquery.inputmask',
             'datatables/jquery.dataTables',
-            'datatables/dataTables.bootstrap'
+            'datatables/dataTables.bootstrap',
+            'pass-show-hide/bootstrap-show-password.min'
         );
         $this->template->styles_specific = array(
             'switchery/switchery.min',
@@ -239,6 +240,8 @@ class Controller_Admin_Users extends Controller_Admin_Common {
             }
 
             if(!count($errors)){
+
+
 
                 $item->values($_POST)->save();
 

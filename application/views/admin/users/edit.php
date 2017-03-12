@@ -3,7 +3,7 @@ if(isset($id)) $action = $params['url_site_admin'].'/'.$params['module'].'/updat
 else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
 
 ?>
-<form id="form" action="<?php echo $action ?>" class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+<form id="formUser" action="<?php echo $action ?>" class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
 
     <div class="row">
 
@@ -44,6 +44,10 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                 </div>
                 <div class="box-body">
                     <div class="form-group">
+                        <label class="col-md-3 control-label" for="login"><?php echo __('Логин') ?></label>
+                        <div class="col-md-9"><input type="text" name="login" value="<?php if(isset($item)) echo $item->login ?>" id="login" class="form-control" <?php if(isset($item) and $item->login != '')echo 'disabled'; else echo 'required'; ?>></div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-md-3 control-label" for="username"><?php echo __('Имя пользователя') ?></label>
                         <div class="col-md-9"><input type="text" name="username" value="<?php if(isset($item)) echo $item->username ?>" id="username" class="form-control" required></div>
                     </div>
@@ -83,6 +87,17 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                             <p class="help-block"><?php echo __('Если необходимо забанить пользователя выберите роль "Забаненные"') ?></p>
                         </div>
                     </div>
+                    <?php if(isset($id) and isset($item)){?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="password"><?php echo __('Смена пароля') ?></label>
+                            <div class="col-md-4"><input type="password" name="password" id="password" placeholder="<?php echo __('Новый пароль') ?>" class="form-control"></div>
+                        </div>
+                    <?php }else{?>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="password"><?php echo __('Установка пароля') ?></label>
+                            <div class="col-md-4"><input type="password" name="password" id="password" placeholder="<?php echo __('Пароль') ?>" class="form-control"></div>
+                        </div>
+                    <?php }?>
                 </div>
             </div>
 
@@ -98,7 +113,9 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                         <li><a href="#authorization" data-toggle="tab"><?php echo __('Авторизации') ?></a></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane active padding" id="actions">...</div>
+                        <div class="tab-pane active padding" id="actions">
+                            <div class="alert alert-info"><?php echo __('Данный раздел на стадии разаработки') ?></div>
+                        </div>
                         <div class="tab-pane" id="authorization">
                             <table id="visits" class="table table-hover table-striped">
                                 <thead>
