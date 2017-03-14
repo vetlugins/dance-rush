@@ -66,9 +66,11 @@ class Controller_Admin_Users extends Controller_Admin_Common {
     {
         $this->page['breadcrumb'] = array(
             array($this->params['url_site_admin'] => __('Главная')),
-            array($this->params['url_site_admin'].'/'.$this->params['module'] => __('Параметры')),
-            array('current' => __('Добавление параметра'))
+            array($this->params['url_site_admin'].'/'.$this->params['module'] => __('Пользователи сайта')),
+            array('current' => __('Добавление пользователя'))
         );
+
+        $roles = ORM::factory('Auth_Role')->where('name','!=','superadmin')->find_all();
 
         if(Session::instance()->get('alert')){
             $alert = Session::instance()->get_once('alert');
@@ -87,7 +89,8 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
         $this->template->content = View::factory('/admin/'.$this->params['module'].'/edit')
             ->bind('item',$item)
-            ->bind('alert',$alert);
+            ->bind('alert',$alert)
+            ->bind('roles',$roles);
     }
 
     public function action_store()
@@ -99,18 +102,9 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
         $_POST = Arr::map('trim', $_POST);
 
-        if($_POST['type'] == 'text'){
-            $value = Validation::factory($_POST)
-                ->rule('value-text', 'not_empty')
-                ->rule('title', 'not_empty')
-                ->rule('name', 'not_empty')
-                ->rule('name', 'Model_'.$this->params['model'].'::check_name',array(':value',':validation', ':field'));
-        }else{
-            $value = Validation::factory($_POST)
-                ->rule('title', 'not_empty')
-                ->rule('name', 'not_empty')
-                ->rule('name', 'Model_'.$this->params['model'].'::check_name',array(':value',':validation', ':field'));
-        }
+        $value = Validation::factory($_POST)
+            ->rule('login', 'not_empty')
+            ->rule('email', 'not_empty');
 
         if(!$value->check())
         {
@@ -119,17 +113,6 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
         if(!count($errors)){
 
-            if($_POST['type'] == 'text') {
-                $_POST['value'] = $_POST['value-text'];
-            }
-
-            if($_POST['type'] == 'checkbox') {
-                if(isset($_POST['value-checkbox'])) $_POST['value'] = 1; else $_POST['value'] = 0;
-            }
-
-            if($_POST['type'] == 'image') {
-
-            }
 
             $item = $model->values($_POST);
 
@@ -139,7 +122,7 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
                 Session::instance()->set('alert',$alert);
 
-                HTTP::redirect($this->params['url_site_admin'].'/'.$this->params['module'].'/'.$item->section.'/'.$item->name);
+                HTTP::redirect($this->params['url_site_admin'].'/'.$this->params['module'].'/'.$item->login.'/edit');
 
             }else{
 
@@ -241,7 +224,9 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
             if(!count($errors)){
 
+                $super_admin = $item->super_admin();
 
+                if($super_admin) unset($_POST['password']);
 
                 $item->values($_POST)->save();
 

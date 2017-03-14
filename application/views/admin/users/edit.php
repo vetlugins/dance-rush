@@ -87,17 +87,10 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                             <p class="help-block"><?php echo __('Если необходимо забанить пользователя выберите роль "Забаненные"') ?></p>
                         </div>
                     </div>
-                    <?php if(isset($id) and isset($item)){?>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="password"><?php echo __('Смена пароля') ?></label>
-                            <div class="col-md-4"><input type="password" name="password" id="password" placeholder="<?php echo __('Новый пароль') ?>" class="form-control"></div>
-                        </div>
-                    <?php }else{?>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="password"><?php echo __('Установка пароля') ?></label>
-                            <div class="col-md-4"><input type="password" name="password" id="password" placeholder="<?php echo __('Пароль') ?>" class="form-control"></div>
-                        </div>
-                    <?php }?>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="password"><?php echo __('Пароль') ?></label>
+                        <div class="col-md-9"><input type="password" name="password" id="password"  class="form-control" <?php if(isset($item))echo 'required'; ?> ></div>
+                    </div>
                 </div>
             </div>
 
@@ -149,8 +142,8 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                         </div>
                     </div>
                 </div>
-                <?php } ?>
             </div>
+            <?php } ?>
         </div>
 
         <div class="col-md-4">

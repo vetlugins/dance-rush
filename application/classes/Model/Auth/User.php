@@ -216,4 +216,22 @@ class Model_Auth_User extends ORM {
 		}
 	}
 
+	/*
+	 * Check user of super admin
+	 */
+	public function super_admin(){
+
+		$super_admin = false;
+
+		$roles = $this->roles->find_all();
+
+		foreach($roles as $role){
+			if($role->name == 'superadmin'){
+				$super_admin = true; break;
+			}
+		}
+
+		return $super_admin;
+	}
+
 } // End Auth User Model

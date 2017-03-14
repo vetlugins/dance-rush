@@ -161,6 +161,7 @@ return array(
     'Повторите пароль'          => 'Confirm password',
     'Установка пароля'          => 'Set password',
     'Пароль'                    => 'Password',
-    'Логин'                     => 'Login'
+    'Логин'                     => 'Login',
+    'Добавление пользователя'   => 'Add a user'
 
 );
