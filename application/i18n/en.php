@@ -153,7 +153,7 @@ return array(
     'О пользователе'            => 'About User',
     'Роль'                      => 'Role',
     'Если роль будет "Администрация", то так же нужно выбрать роль "Авторизированные"' => 'If the role is "Administration", then you also need to select the role "Authorized"',
-    'Если необходимо забанить пользователя выберите роль "Забаненные"' => 'If you want to ban a user, select the role "Banned"',
+    'Если необходимо забанить пользователя выберите роль "Забаненные"'                 => 'If you want to ban a user, select the role "Banned"',
     'Активность пользователя'   => 'User activity',
     'Авторизации'               => 'Authorization',
     'Смена пароля'              => 'Change Password',
@@ -162,6 +162,11 @@ return array(
     'Установка пароля'          => 'Set password',
     'Пароль'                    => 'Password',
     'Логин'                     => 'Login',
-    'Добавление пользователя'   => 'Add a user'
+    'Добавление пользователя'   => 'Add a user',
+    'Пользователь с логином <b>:field</b> уже добавлен'   => 'User with login <b>:field</b> already added',
+    'Пользователь с email <b>:field</b> уже добавлен'     => 'User with email <b>:field</b> already added',
+    'Пользователь с телефоном <b>:field</b> уже добавлен' => 'A user with a phone <b>:field</b> has already been added',
+
+    'В этом альбоме есть фотографии' => 'There are photos in this album'
 
 );

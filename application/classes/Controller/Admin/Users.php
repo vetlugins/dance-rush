@@ -104,8 +104,19 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
         $value = Validation::factory($_POST)
             ->rule('login', 'not_empty')
+            ->rule('login', 'Model_'.$this->params['model'].'::check_login',array(':value',':validation', ':field'))
             ->rule('email', 'not_empty')
+            ->rule('email', 'Model_'.$this->params['model'].'::check_email',array(':value',':validation', ':field'))
             ->rule('role', 'not_empty');
+
+        if(!empty($_POST['phone'])){
+            $phone = Validation::factory($_POST)
+                ->rule('phone', 'Model_'.$this->params['model'].'::check_phone',array(':value',':validation', ':field'));
+
+            if(!$phone->check()){
+                $errors[] = $value->errors('validation');
+            }
+        }
 
         if(!empty($_FILES['image']['name'])){
 
