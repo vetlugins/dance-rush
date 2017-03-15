@@ -104,7 +104,8 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
         $value = Validation::factory($_POST)
             ->rule('login', 'not_empty')
-            ->rule('email', 'not_empty');
+            ->rule('email', 'not_empty')
+            ->rule('role', 'not_empty');
 
         if(!$value->check())
         {
@@ -113,10 +114,18 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
         if(!count($errors)){
 
+            unset($_POST['addUser']);
+            unset($_POST['role']);
 
-            $item = $model->values($_POST);
+            $_POST['password_confirm'] = $_POST['password'];
+            $key = array_keys($_POST);
 
-            if($item->save()){
+            //Todo Это не дело надо переделать
+            unset($key[7]);
+
+            $item = $model->create_user($_POST,$key);
+
+            if($item){
 
                 $alert .= '<div class="alert alert-success"><p>'.__('Запись успешно создана').'</p></div>';
 
@@ -228,7 +237,7 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
                 if($super_admin) unset($_POST['password']);
 
-                $item->values($_POST)->save();
+                $item->update_user($_POST);
 
                 $alert .= '<div class="alert alert-success"><p>'.__('Запись успешно изменена').'</p></div>';
 

@@ -89,7 +89,7 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="password"><?php echo __('Пароль') ?></label>
-                        <div class="col-md-9"><input type="password" name="password" id="password"  class="form-control" <?php if(isset($item))echo 'required'; ?> ></div>
+                        <div class="col-md-9"><input type="password" name="password" id="password"  class="form-control" <?php if(!isset($item))echo 'required'; ?> ></div>
                     </div>
                 </div>
             </div>

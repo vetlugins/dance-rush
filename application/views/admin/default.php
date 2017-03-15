@@ -107,8 +107,7 @@
             <div class="user-box">
                 <div class="avatar">
                     <img src="<?php
-                        if(is_file(URL::base().'uploads/users/'.Auth::instance()->get_user()->photo)) echo  URL::base().'uploads/users/'.Auth::instance()->get_user()->photo;
-                        else echo URL::base().'uploads/users/no_avatar.jpg';
+                        echo URL::base().'uploads/users/no_avatar.jpg';
                     ?>" alt="" />
                 </div>
                 <div class="details">

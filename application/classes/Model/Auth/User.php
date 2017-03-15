@@ -141,7 +141,7 @@ class Model_Auth_User extends ORM {
 	public static function get_password_validation($values)
 	{
 		return Validation::factory($values)
-			->rule('password', 'min_length', array(':value', 8))
+			->rule('password', 'min_length', array(':value', 3))
 			->rule('password_confirm', 'matches', array(':validation', ':field', 'password'));
 	}
 
@@ -164,7 +164,7 @@ class Model_Auth_User extends ORM {
 	public function create_user($values, $expected)
 	{
 		// Validation for passwords
-		$extra_validation = Model_User::get_password_validation($values)
+		$extra_validation = Model_Auth_User::get_password_validation($values)
 			->rule('password', 'not_empty');
 
 		return $this->values($values, $expected)->create($extra_validation);
@@ -199,7 +199,7 @@ class Model_Auth_User extends ORM {
 		}
 
 		// Validation for passwords
-		$extra_validation = Model_User::get_password_validation($values);
+		$extra_validation = Model_Auth_User::get_password_validation($values);
 
 		return $this->values($values, $expected)->update($extra_validation);
 	}
