@@ -14,7 +14,7 @@ class DeletedAtFieldsUsers extends Migration
     //   )
     // );
 
-    $this->add_column('via_users', 'deleted_at', array('timestamp'=>'NULL', 'default' => 'NULL'));
+    $this->add_column('via_users', 'deleted_at', array('timestamp', 'default' => 'NULL'));
   }
 
   public function down()
