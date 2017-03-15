@@ -14,7 +14,7 @@ class CreatedAtFieldsUser extends Migration
     //   )
     // );
 
-     $this->add_column('via_users', 'created_at', array('timestamp'));
+     $this->add_column('via_users', 'created_at', array('timestamp','default' => 'CURRENT_TIMESTAMP'));
      $this->remove_column('via_users', 'date');
   }
 
