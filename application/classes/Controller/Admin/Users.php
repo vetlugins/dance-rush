@@ -107,25 +107,55 @@ class Controller_Admin_Users extends Controller_Admin_Common {
             ->rule('email', 'not_empty')
             ->rule('role', 'not_empty');
 
+        if(!empty($_FILES['image']['name'])){
+
+            $value_image = Validation::factory($_FILES)
+                ->rule('image', 'Upload::valid')
+                ->rule('image', 'Upload::type', array(':value', array('jpg', 'jpeg','JPG', 'JPEG')));
+
+            if(!$value_image->check()){
+                $errors[] = $value->errors('validation');
+            }
+
+        }
+
         if(!$value->check())
         {
-            $errors = $value->errors('validation');
+            $errors[] = $value->errors('validation');
         }
 
         if(!count($errors)){
 
+            $post_roles = $_POST['role'];
+            $_POST['password_confirm'] = $_POST['password'];
+
             unset($_POST['addUser']);
             unset($_POST['role']);
 
-            $_POST['password_confirm'] = $_POST['password'];
-            $key = array_keys($_POST);
-
-            //Todo Это не дело надо переделать
-            unset($key[7]);
+            $key = $_POST;
+            unset($key['password_confirm']);
+            $key = array_keys($key);
 
             $item = $model->create_user($_POST,$key);
 
             if($item){
+
+                $roles = [];
+
+                foreach($post_roles as $role) $roles['name'] = $role;
+
+                $item->add('roles', ORM::factory('Auth_Role',$roles));
+
+                if(!empty($_FILES['image']['name'])){
+
+                    $folders = [];
+                    $setting = [
+                        'cut' => [],
+                        'coverable' => 1
+                    ];
+
+                    Helper::setCover($this->params['module'],$item->id,$_FILES,$folders,$setting);
+                }
 
                 $alert .= '<div class="alert alert-success"><p>'.__('Запись успешно создана').'</p></div>';
 

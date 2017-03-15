@@ -74,11 +74,11 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                                 <?php
                                     foreach($roles as $role){
                                         if(!isset($id)){
-                                            if($role->id == 1) echo '<option value="'.$role->id.'" selected>'.$role->title.'</option>';
-                                            else echo '<option value="'.$role->id.'">'.$role->title.'</option>';
+                                            if($role->id == 1) echo '<option value="'.$role->name.'" selected>'.$role->title.'</option>';
+                                            else echo '<option value="'.$role->name.'">'.$role->title.'</option>';
                                         }else{
                                             if(array_key_exists($role->id,$user_roles)) echo '<option value="'.$role->id.'" selected>'.$role->title.'</option>';
-                                            else echo '<option value="'.$role->id.'">'.$role->title.'</option>';
+                                            else echo '<option value="'.$role->name.'">'.$role->title.'</option>';
                                         }
                                     }
                                 ?>
@@ -168,18 +168,9 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                                         <div class="form-group">
                                             <label for="image"></label>
                                             <div class="col-sm-12 text-center">
-                                                <?php
-                                                if(isset($item) and !empty($item->cover())){
-                                                    ?>
-                                                    <p>
-                                                        <a href="/uploads/<?php echo $params['module'] ?>/original/<?php echo $item->cover() ?>" class="fancybox"><img src="/uploads/<?php echo $params['module'] ?>/small/<?php echo $item->cover() ?>" class="img-thumbnail"></a>
-                                                    </p>
-                                                <?php }else{ ?>
-                                                    <p><img src="/uploads/users/no_avatar.jpg" alt="" style="width: 100%"></p>
-                                                    <p class="alert alert-info">
-                                                        <?php echo __('Фотография отсутствует') ?>
-                                                    </p>
-                                                <?php } ?>
+                                                <?php if(isset($item)){?>
+                                                    <p><a href="/uploads/<?php echo $params['module'] ?>/original/<?php echo $item->cover() ?>" class="fancybox"><img src="/uploads/<?php echo $params['module'] ?>/original/<?php echo $item->cover() ?>" class="img-thumbnail"></a></p>
+                                                <?php }?>
 
                                                 <input type="file" name="image" class="btn btn-info file-inputs" title="<?php echo __('Выберите файл') ?>">
                                                 <p class="help-block"><?php echo __('Допустимые форматы') ?>: jpg, jpeg, png</p>

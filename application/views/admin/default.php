@@ -107,7 +107,7 @@
             <div class="user-box">
                 <div class="avatar">
                     <img src="<?php
-                        echo URL::base().'uploads/users/no_avatar.jpg';
+                        echo URL::base().'uploads/users/original/'.Auth::instance()->get_user()->cover();
                     ?>" alt="" />
                 </div>
                 <div class="details">

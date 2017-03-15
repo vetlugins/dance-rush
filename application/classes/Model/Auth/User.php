@@ -208,11 +208,11 @@ class Model_Auth_User extends ORM {
 	 * Photo user
 	 */
 	public function cover(){
-		$cover = ORM::factory('Covers')->where('object_type','=','user')->and_where('object_id','=',$this->id)->and_where('coverable','=',1)->find();
+		$cover = ORM::factory('Covers')->where('object_type','=','users')->and_where('object_id','=',$this->id)->and_where('coverable','=',1)->find();
 		if($cover->loaded()){
 			return $cover->name;
 		}else{
-			return $cover = '';
+			return $cover = 'no_avatar.jpg';
 		}
 	}
 
@@ -232,6 +232,14 @@ class Model_Auth_User extends ORM {
 		}
 
 		return $super_admin;
+	}
+
+	public function soft_delete(){
+		return $this->set('deleted_at', date('Y-m-d H:i:s'))->update();
+	}
+
+	public function where_soft(){
+		return $this->where('deleted_at','=',null);
 	}
 
 } // End Auth User Model
