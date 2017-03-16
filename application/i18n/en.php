@@ -13,10 +13,14 @@ return array(
     'Удалить нельзя'            => 'Remove impossible',
     'Скрыть / Показать'         => 'Hide / Show',
     'Нет элементов для отображения' => 'There are no items to display',
-    'Идентификатор не передан'  => 'ID is not passed',
+    'Идентификатор не передан'      => 'ID is not passed',
+    'Данный раздел на стадии разаработки'   => 'This section is under development',
+
+    //VALIDATION
+    'Не верный формат изображения'          => 'Invalid image format',
     'URL (:value) объекта  уже есть в базе' => 'URL (:value) of the object is already in the database',
     ':field должно содержать только буквы'  => ':field must contain only letters',
-    'Данный раздел на стадии разаработки' => 'This section is under development',
+    'Произошла какая то не понятная ошибка' => 'There was some sort of error does not clear',
 
     'Главная'                   => 'Home',
     'Название'                  => 'Title',
@@ -44,7 +48,7 @@ return array(
     'Запись успешно создана'    => 'Record created successfully',
     'Запись успешно изменена'   => 'Record successfully updated',
     'Не удалось создать запись' => 'Failed to create post',
-    'Произошла какая то не понятная ошибка' => 'There was some sort of error does not clear',
+
 
     'Блог сайта'                => 'Blog site',
     'управление блогом вашего сайта' => 'management blog your site',

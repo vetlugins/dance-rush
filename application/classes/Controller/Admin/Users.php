@@ -98,7 +98,7 @@ class Controller_Admin_Users extends Controller_Admin_Common {
         $model = ORM::factory($this->params['model']);
 
         $alert = '';
-        $errors = array();
+        $errors = [];
 
         $_POST = Arr::map('trim', $_POST);
 
@@ -109,23 +109,15 @@ class Controller_Admin_Users extends Controller_Admin_Common {
             ->rule('email', 'Model_'.$this->params['model'].'::check_email',array(':value',':validation', ':field'))
             ->rule('role', 'not_empty');
 
-        if(!empty($_POST['phone'])){
-            $phone = Validation::factory($_POST)
-                ->rule('phone', 'Model_'.$this->params['model'].'::check_phone',array(':value',':validation', ':field'));
-
-            if(!$phone->check()){
-                $errors[] = $value->errors('validation');
-            }
-        }
 
         if(!empty($_FILES['image']['name'])){
 
             $value_image = Validation::factory($_FILES)
                 ->rule('image', 'Upload::valid')
-                ->rule('image', 'Upload::type', array(':value', array('jpg', 'jpeg','JPG', 'JPEG')));
+                ->rule('image', 'Upload::type', array(':value', array('jpg', 'jpeg','JPG', 'JPEG','png', 'PNG')));
 
             if(!$value_image->check()){
-                $errors[] = $value->errors('validation');
+                $errors[] = $value_image->errors('validation');
             }
 
         }
@@ -185,9 +177,10 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
         }else{
 
-            Helper::aprint($errors,'die');
-
-            foreach($errors as $error) $alert .= '<div class="alert alert-danger"><p>'.$error.'</p></div>';
+            foreach($errors as $error){
+                foreach($error as $value)
+                $alert .= '<div class="alert alert-danger"><p>'.$value.'</p></div>';
+            }
 
             Session::instance()->set('alert',$alert)->set('item',$_POST);
 

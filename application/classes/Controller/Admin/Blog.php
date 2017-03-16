@@ -186,11 +186,11 @@ class Controller_Admin_Blog extends Controller_Admin_Common {
 
             if(!$value->check())
             {
-                $errors = $value->errors('validation');
+                $errors[] = $value->errors('validation');
             }
 
             if(!$image->check()){
-                $errors = $value->errors('validation');
+                $errors[] = $image->errors('validation');
             }
 
             if(!count($errors)){

@@ -9,10 +9,10 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
 
         <div class="margin-bottom-sm">
             <div class="col-md-8">
-                <?php if(!empty($alert)) echo str_replace('validation.url.','',$alert) ?>
+                <?php if(!empty($alert)) echo $alert ?>
             </div>
             <div class="col-md-4">
-                <?php if(!isset($id) and !isset($item)){ ?>
+                <?php if(!isset($id)){ ?>
                     <button type="submit" name="addUser" class="btn btn-success pull-right" style="margin-left: 10px">
                         <?php echo __('Добавить') ?>
                     </button>
@@ -45,7 +45,7 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                 <div class="box-body">
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="login"><?php echo __('Логин') ?></label>
-                        <div class="col-md-9"><input type="text" name="login" value="<?php if(isset($item)) echo $item->login ?>" id="login" class="form-control" <?php if(isset($item) and $item->login != '')echo 'disabled'; else echo 'required'; ?>></div>
+                        <div class="col-md-9"><input type="text" name="login" value="<?php if(isset($item)) echo $item->login ?>" id="login" class="form-control" <?php if(isset($id) and isset($item) and $item->login != '')echo 'disabled'; else echo 'required'; ?>></div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="username"><?php echo __('Имя пользователя') ?></label>
@@ -53,11 +53,11 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="email"><?php echo __('Email') ?></label>
-                        <div class="col-md-9"><input type="email" name="email" value="<?php if(isset($item)) echo $item->email ?>" id="email" class="form-control" <?php if(isset($item) and $item->email != '')echo 'disabled'; else echo 'required'; ?> ></div>
+                        <div class="col-md-9"><input type="email" name="email" value="<?php if(isset($item)) echo $item->email ?>" id="email" class="form-control" <?php if(isset($id) and isset($item) and $item->email != '')echo 'disabled'; else echo 'required'; ?> ></div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="phone"><?php echo __('Телефон') ?></label>
-                        <div class="col-md-9"><input type="text" name="phone" data-inputmask="'mask': '+7(999)999-99-99'" value="<?php if(isset($item)) echo $item->phone ?>" id="phone" class="form-control"></div>
+                        <div class="col-md-9"><input type="text" name="phone"  value="<?php if(isset($item)) echo $item->phone ?>" id="phone" class="form-control"></div><!--  data-inputmask="'mask': '+7(999)999-99-99'" -->
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="city"><?php echo __('Город') ?></label>
@@ -89,7 +89,7 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="password"><?php echo __('Пароль') ?></label>
-                        <div class="col-md-9"><input type="password" name="password" id="password"  class="form-control" <?php if(!isset($item))echo 'required'; ?> ></div>
+                        <div class="col-md-9"><input type="password" name="password" id="password"  class="form-control" <?php if(!isset($id))echo 'required'; ?> ></div>
                     </div>
                 </div>
             </div>
@@ -168,7 +168,7 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                                         <div class="form-group">
                                             <label for="image"></label>
                                             <div class="col-sm-12 text-center">
-                                                <?php if(isset($item)){?>
+                                                <?php if(isset($id) and isset($item)){?>
                                                     <p><a href="/uploads/<?php echo $params['module'] ?>/original/<?php echo $item->cover() ?>" class="fancybox"><img src="/uploads/<?php echo $params['module'] ?>/original/<?php echo $item->cover() ?>" class="img-thumbnail"></a></p>
                                                 <?php }?>
 
