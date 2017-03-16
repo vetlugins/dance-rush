@@ -163,9 +163,9 @@ return array(
     'Пароль'                    => 'Password',
     'Логин'                     => 'Login',
     'Добавление пользователя'   => 'Add a user',
-    'Пользователь с логином <b>:field</b> уже добавлен'   => 'User with login <b>:field</b> already added',
-    'Пользователь с email <b>:field</b> уже добавлен'     => 'User with email <b>:field</b> already added',
-    'Пользователь с телефоном <b>:field</b> уже добавлен' => 'A user with a phone <b>:field</b> has already been added',
+    'Пользователь с логином <b>:value</b> уже добавлен'   => 'User with login <b>:value</b> already added',
+    'Пользователь с email <b>:value</b> уже добавлен'     => 'User with email <b>:value</b> already added',
+    'Пользователь с телефоном <b>:value</b> уже добавлен' => 'A user with a phone <b>:value</b> has already been added',
 
     'В этом альбоме есть фотографии' => 'There are photos in this album'
 

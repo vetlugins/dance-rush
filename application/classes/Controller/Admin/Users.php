@@ -165,7 +165,7 @@ class Controller_Admin_Users extends Controller_Admin_Common {
                         'coverable' => 1
                     ];
 
-                    Helper::setCover($this->params['module'],$item->id,$_FILES,$folders,$setting);
+                    Cover::set_cover($this->params['module'],$item->id,$_FILES,$folders,$setting);
                 }
 
                 $alert .= '<div class="alert alert-success"><p>'.__('Запись успешно создана').'</p></div>';
@@ -184,6 +184,8 @@ class Controller_Admin_Users extends Controller_Admin_Common {
             }
 
         }else{
+
+            Helper::aprint($errors,'die');
 
             foreach($errors as $error) $alert .= '<div class="alert alert-danger"><p>'.$error.'</p></div>';
 
