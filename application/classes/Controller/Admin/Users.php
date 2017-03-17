@@ -106,8 +106,10 @@ class Controller_Admin_Users extends Controller_Admin_Common {
             ->rule('login', 'not_empty')
             ->rule('login', 'Model_'.$this->params['model'].'::check_login',array(':value',':validation', ':field'))
             ->rule('email', 'not_empty')
-            ->rule('email', 'Model_'.$this->params['model'].'::check_email',array(':value',':validation', ':field'))
-            ->rule('role', 'not_empty');
+            ->rule('email', 'Model_'.$this->params['model'].'::check_email',array(':value',': ', ':field'))
+            ->rule('role', 'not_empty')
+            ->rule('password', 'not_empty')
+            ->rule('password', 'alpha_dash');
 
 
         if(!empty($_FILES['image']['name'])){
@@ -131,12 +133,12 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
             $post_roles = $_POST['role'];
             $_POST['password_confirm'] = $_POST['password'];
+            $key = $_POST;
 
             unset($_POST['addUser']);
             unset($_POST['role']);
-
-            $key = $_POST;
             unset($key['password_confirm']);
+
             $key = array_keys($key);
 
             $item = $model->create_user($_POST,$key);
@@ -253,7 +255,7 @@ class Controller_Admin_Users extends Controller_Admin_Common {
         if($item->loaded()){
 
             $alert = '';
-            $errors = array();
+            $errors = [];
 
             $_POST = Arr::map('trim', $_POST);
 
@@ -261,9 +263,30 @@ class Controller_Admin_Users extends Controller_Admin_Common {
                 ->rule('username', 'not_empty')
                 ->rule('role', 'not_empty');
 
-            if(!$value->check())
-            {
-                $errors = $value->errors('validation');
+            if(!$value->check()){
+                $errors[] = $value->errors('validation');
+            }
+
+            if(!empty($_POST['password'])){
+                $_POST['password_confirm'] = $_POST['password'];
+
+                $password_validation  = Validation::factory($_POST)
+                    ->rule('password', 'alpha_dash');
+
+                if(!$password_validation->check()){
+                    $errors[] = $password_validation->errors('validation');
+                }
+            }
+
+            if(!empty($_FILES['image']['name'])){
+
+                $value_image = Validation::factory($_FILES)
+                    ->rule('image', 'Upload::valid')
+                    ->rule('image', 'Upload::type', array(':value', array('jpg', 'jpeg','JPG', 'JPEG','png', 'PNG')));
+
+                if(!$value_image->check()){
+                    $errors[] = $value_image->errors('validation');
+                }
 
             }
 
@@ -275,11 +298,26 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
                 $item->update_user($_POST);
 
-                $alert .= '<div class="alert alert-success"><p>'.__('Запись успешно изменена').'</p></div>';
+                if($item){
+                    if(!empty($_FILES['image']['name'])){
 
-                Session::instance()->set('alert',$alert);
+                        $folders = [];
+                        $setting = [
+                            'cut' => [],
+                            'coverable' => 1
+                        ];
 
-                HTTP::redirect($this->params['url_site_admin'].'/'.$this->params['module'].'/'.$item->login.'/edit');
+                        Cover::set_cover($this->params['module'],$item->id,$_FILES,$folders,$setting);
+                    }
+
+                    $alert .= '<div class="alert alert-success"><p>'.__('Запись успешно изменена').'</p></div>';
+
+                    Session::instance()->set('alert',$alert);
+
+                    HTTP::redirect($this->params['url_site_admin'].'/'.$this->params['module'].'/'.$item->login.'/edit');
+                }else{
+                    echo __('Произошла какая то не понятная ошибка'); die;
+                }
 
             }else{
 
@@ -293,6 +331,20 @@ class Controller_Admin_Users extends Controller_Admin_Common {
         }else{
             echo __('Произошла какая то не понятная ошибка'); die;
         }
+
+    }
+
+    public function action_remove(){
+
+
+
+    }
+
+    public function action_logout(){
+
+        Auth::instance()->logout();
+
+        HTTP::redirect('/');
 
     }
 

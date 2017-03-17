@@ -2,7 +2,7 @@
 
 return array(
     'alpha'         => ':field must contain only letters',
-    'alpha_dash'    => ':field must contain only numbers, letters and dashes',
+    'alpha_dash'    => ':field должен содержать только цифры, буквы (латиница) и дефисы',
     'alpha_numeric' => ':field must contain only letters and numbers',
     'color'         => ':field must be a color',
     'max_length'    => ':field must not exceed :param2 characters long',
@@ -17,7 +17,6 @@ return array(
     'check_photo'   => 'В этом альбоме есть фотографии',
     'check_login'   => 'Пользователь с логином <b>:value</b> уже добавлен',
     'check_email'   => 'Пользователь с email <b>:value</b> уже добавлен',
-    'check_phone'   => 'Пользователь с телефоном <b>:value</b> уже добавлен',
     'name'          => 'Объект с такием именем есть в базе',
     'Upload::type'  => 'Не верный формат изображения',
  );

@@ -252,15 +252,6 @@ class Model_Auth_User extends ORM {
 		}
 	}
 
-	public static function check_phone($value, $validation, $field)
-	{
-		$page = ORM::factory('Auth_User')->where('phone','=',$value)->find();
-
-		if($page->loaded())
-		{
-			$validation->error($field, Kohana::message('validation', 'check_phone'));
-		}
-	}
 
 	public static function check_email($value, $validation, $field)
 	{

@@ -31,11 +31,13 @@ foreach($config->languages as $lang => $settings)
  * defaults for the URI.
  */
 // Пользователи сайта
-Route::set('admin-users', 'admin/users')->defaults(['directory'  => 'Admin','controller' => 'Users']);
-Route::set('admin-users-add', 'admin/users/add')->defaults(array('directory'  => 'Admin','controller' => 'Users','action' => 'add'));
-Route::set('admin-users-store', 'admin/users/store')->defaults(array('directory'  => 'Admin','controller' => 'Users','action' => 'store'));
-Route::set('admin-users-edit', 'admin/users/<id>/edit')->defaults(['directory'  => 'Admin','controller' => 'Users','action' => 'edit']);
-Route::set('admin-users-update', 'admin/users/update')->defaults(['directory'  => 'Admin','controller' => 'Users','action' => 'update']);
+Route::set('admin-users',        'admin/users')->defaults(['directory'  => 'Admin','controller' => 'Users']);
+Route::set('admin-users-add',    'admin/users/add')->defaults(array('directory' => 'Admin','controller' => 'Users','action' => 'add'));
+Route::set('admin-users-store',  'admin/users/store')->defaults(array('directory' => 'Admin','controller' => 'Users','action' => 'store'));
+Route::set('admin-users-edit',   'admin/users/<id>/edit')->defaults(['directory' => 'Admin','controller' => 'Users','action' => 'edit']);
+Route::set('admin-users-update', 'admin/users/update')->defaults(['directory' => 'Admin','controller' => 'Users','action' => 'update']);
+Route::set('admin-users-logout', 'admin/users/logout')->defaults(['directory' => 'Admin','controller' => 'Users','action' => 'logout']);
+Route::set('admin-users-remove', 'admin/users/remove')->defaults(['directory' => 'Admin','controller' => 'Users','action' => 'remove']);
 
 //Статистика сайта
 Route::set('admin-statistics', 'admin/statistics')->defaults(array('directory'  => 'Admin','controller' => 'Statistics'));

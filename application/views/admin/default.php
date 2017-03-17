@@ -118,7 +118,7 @@
                         <li><a href="<?php echo $params['url_site_admin'] ?>/account/<?php echo Auth::instance()->get_user()->login ?>" title="<?php echo __('Мой профайл') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-user"></i></a></li>
                         <li><a href="" title="<?php echo __('Мои настройки') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-gears"></i></a></li>
                         <li><a href="<?php echo $params['url_site_admin'] ?>/mail/<?php echo Auth::instance()->get_user()->login ?>" title="<?php echo __('Мои письма') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-envelope"></i><span class="label label-warning"><?php // echo $new_mail ?></span></a></li>
-                        <li><a href="<?php echo $params['url_site_admin'] ?>/account/logout" title="<?php echo __('Выход') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-power-off"></i></a></li>
+                        <li><a href="<?php echo $params['url_site_admin'] ?>/users/logout" title="<?php echo __('Выход') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-power-off"></i></a></li>
                     </ul>
                     <div class="clearfix"></div>
                 </div>

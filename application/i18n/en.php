@@ -21,6 +21,9 @@ return array(
     'URL (:value) объекта  уже есть в базе' => 'URL (:value) of the object is already in the database',
     ':field должно содержать только буквы'  => ':field must contain only letters',
     'Произошла какая то не понятная ошибка' => 'There was some sort of error does not clear',
+    ':field должен содержать только цифры, буквы (латиница) и дефисы' => ':field must contain only digits, letters (latin) and dashes',
+    'Пользователь с логином <b>:value</b> уже добавлен'   => 'User with login <b>:value</b> already added',
+    'Пользователь с email <b>:value</b> уже добавлен'     => 'User with email <b>:value</b> already added',
 
     'Главная'                   => 'Home',
     'Название'                  => 'Title',
@@ -167,9 +170,7 @@ return array(
     'Пароль'                    => 'Password',
     'Логин'                     => 'Login',
     'Добавление пользователя'   => 'Add a user',
-    'Пользователь с логином <b>:value</b> уже добавлен'   => 'User with login <b>:value</b> already added',
-    'Пользователь с email <b>:value</b> уже добавлен'     => 'User with email <b>:value</b> already added',
-    'Пользователь с телефоном <b>:value</b> уже добавлен' => 'A user with a phone <b>:value</b> has already been added',
+
 
     'В этом альбоме есть фотографии' => 'There are photos in this album'
 
