@@ -37,7 +37,7 @@ Route::set('admin-users-store',  'admin/users/store')->defaults(array('directory
 Route::set('admin-users-edit',   'admin/users/<id>/edit')->defaults(['directory' => 'Admin','controller' => 'Users','action' => 'edit']);
 Route::set('admin-users-update', 'admin/users/update')->defaults(['directory' => 'Admin','controller' => 'Users','action' => 'update']);
 Route::set('admin-users-logout', 'admin/users/logout')->defaults(['directory' => 'Admin','controller' => 'Users','action' => 'logout']);
-Route::set('admin-users-remove', 'admin/users/remove')->defaults(['directory' => 'Admin','controller' => 'Users','action' => 'remove']);
+Route::set('admin-users-remove', 'admin/users/<id>/remove')->defaults(['directory' => 'Admin','controller' => 'Users','action' => 'remove']);
 
 //Статистика сайта
 Route::set('admin-statistics', 'admin/statistics')->defaults(array('directory'  => 'Admin','controller' => 'Statistics'));

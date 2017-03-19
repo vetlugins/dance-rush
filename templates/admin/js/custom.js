@@ -94,8 +94,26 @@
 			}
         });
     });
-};
+	};
+
+	$('.alertDialog').click(function(){
+		var type = $(this).attr('data-alert-type');
+		var message = $(this).attr('data-alert-message');
+
+		jAlertDialog(type,message);
+	});
+
 })(jQuery);
 
 //Sidebar Nav
  $(".sidebar .sub-nav").sub();
+
+function jAlertDialog(type,message){
+	if(type == 'alert'){
+		alert(message, 'Alert Dialog');
+	}
+
+	if(type == 'confirm'){
+		confirm(message);
+	}
+}

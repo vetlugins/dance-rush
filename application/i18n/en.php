@@ -51,7 +51,9 @@ return array(
     'Запись успешно создана'    => 'Record created successfully',
     'Запись успешно изменена'   => 'Record successfully updated',
     'Не удалось создать запись' => 'Failed to create post',
+    'Не удалось удалить запись' => 'Could not delete post',
 
+    'Вы действительно хотите удалить этого пользователя' => 'Are you sure you want to delete this user?',
 
     'Блог сайта'                => 'Blog site',
     'управление блогом вашего сайта' => 'management blog your site',

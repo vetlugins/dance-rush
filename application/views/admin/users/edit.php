@@ -1,7 +1,6 @@
 <?php
-if(isset($id)) $action = $params['url_site_admin'].'/'.$params['module'].'/update';
-else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
-
+if(isset($id)) $action = Route::url('admin-users-update');
+else $action = Route::url('admin-users-store');
 ?>
 <form id="formUser" action="<?php echo $action ?>" class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
 
@@ -16,15 +15,18 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                     <button type="submit" name="addUser" class="btn btn-success pull-right" style="margin-left: 10px">
                         <?php echo __('Добавить') ?>
                     </button>
-                    <a href="<?php echo $params['url_site_admin'] ?>/<?php echo $params['module'] ?>" class="btn btn-danger pull-right">
+                    <a href="<?php echo Route::url('admin-users') ?>" class="btn btn-default pull-right">
                         <?php echo __('Отмена') ?>
                     </a>
                 <?php }else{ ?>
                     <input type="hidden" name="login" value="<?php echo $item->login ?>">
-                    <button type="submit" name="editUser" class="btn btn-success pull-right" style="margin-left: 10px">
+                    <a href="<?php echo Route::url('admin-users-remove',['id' => $item->login]) ?>" class="btn btn-danger pull-right alertDialog" data-alert-type="confirm" data-alert-message="<?php echo __('Вы действительно хотите удалить этого пользователя')?>">
+                        <?php echo __('Удалить') ?>
+                    </a>
+                    <button type="submit" name="editUser" class="btn btn-success pull-right" style="margin:0 10px">
                         <?php echo __('Редактировать') ?>
                     </button>
-                    <a href="<?php echo $params['url_site_admin'] ?>/<?php echo $params['module'] ?>" class="btn btn-danger pull-right">
+                    <a href="<?php echo Route::url('admin-users') ?>" class="btn btn-default pull-right">
                         <?php echo __('Отмена') ?>
                     </a>
                 <?php } ?>
@@ -169,7 +171,7 @@ else $action = $params['url_site_admin'].'/'.$params['module'].'/store';
                                             <label for="image"></label>
                                             <div class="col-sm-12 text-center">
                                                 <?php if(isset($id) and isset($item)){?>
-                                                    <p><a href="/uploads/<?php echo $params['module'] ?>/original/<?php echo $item->cover() ?>" class="fancybox"><img src="/uploads/<?php echo $params['module'] ?>/original/<?php echo $item->cover() ?>" class="img-thumbnail"></a></p>
+                                                    <p><a href="<?php echo $item->cover() ?>" class="fancybox"><img src="<?php echo $item->cover('medium') ?>" class="img-thumbnail"></a></p>
                                                 <?php }?>
 
                                                 <input type="file" name="image" class="btn btn-info file-inputs" title="<?php echo __('Выберите файл') ?>">

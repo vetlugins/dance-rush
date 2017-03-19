@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/templates/plugins/bootstrap/3.2.0/bootstrap.css" />
     <link rel="stylesheet" href="<?php echo $params['plugins'] ?>icon/css/font-awesome.css" />
     <link rel="stylesheet" href="<?php echo $params['plugins'] ?>animate/animate.css" />
-
+    <link rel="stylesheet" href="<?php echo $params['plugins'] ?>alerts/jquery.alerts.css" />
     <?php foreach($styles_specific as $style_specific): ?>
         <link href="<?php echo $params['plugins'].$style_specific; ?>.css" rel="stylesheet" type="text/css" />
     <?php endforeach; ?>
@@ -107,7 +107,7 @@
             <div class="user-box">
                 <div class="avatar">
                     <img src="<?php
-                        echo URL::base().'uploads/users/original/'.Auth::instance()->get_user()->cover();
+                        echo Auth::instance()->get_user()->cover('small');
                     ?>" alt="" />
                 </div>
                 <div class="details">
@@ -243,6 +243,8 @@
 <script src="<?php echo $params['plugins'] ?>slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 <script src="<?php echo $params['plugins'] ?>pace/pace.min.js" type="text/javascript"></script>
 <script src="<?php echo $params['plugins'] ?>nicescroll/jquery.nicescroll.min.js" type="text/javascript"></script>
+<script src="<?php echo $params['plugins'] ?>alerts/jquery.alerts.js" type="text/javascript"></script>
+<script src="<?php echo $params['plugins'] ?>draggable/jquery.ui.draggable.js" type="text/javascript"></script>
 
 <script src="<?php echo $params['theme'] ?>js/custom.js" type="text/javascript"></script>
 <script src="<?php echo $params['theme'] ?>js/lang/ru.js" type="text/javascript"></script>

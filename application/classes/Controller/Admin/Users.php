@@ -25,14 +25,14 @@ class Controller_Admin_Users extends Controller_Admin_Common {
             'inputmask/jquery.inputmask',
             'datatables/jquery.dataTables',
             'datatables/dataTables.bootstrap',
-            'pass-show-hide/bootstrap-show-password.min'
+            'pass-show-hide/bootstrap-show-password.min',
         );
         $this->template->styles_specific = array(
             'switchery/switchery.min',
             'jgrowl/jquery.jgrowl',
             'bootstrapValidator/bootstrapValidator.min',
             'fancybox/jquery.fancybox',
-            'select2/css/select2.min'
+            'select2/css/select2.min',
         );
 
 
@@ -153,13 +153,8 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
                 if(!empty($_FILES['image']['name'])){
 
-                    $folders = [];
-                    $setting = [
-                        'cut' => [],
-                        'coverable' => 1
-                    ];
-
-                    Cover::set_cover($this->params['module'],$item->id,$_FILES,$folders,$setting);
+                    $cover = new Cover();
+                    $cover->set_cover($this->params['module'],$item->id,$_FILES);
                 }
 
                 $alert .= '<div class="alert alert-success"><p>'.__('Запись успешно создана').'</p></div>';
@@ -301,13 +296,8 @@ class Controller_Admin_Users extends Controller_Admin_Common {
                 if($item){
                     if(!empty($_FILES['image']['name'])){
 
-                        $folders = [];
-                        $setting = [
-                            'cut' => [],
-                            'coverable' => 1
-                        ];
-
-                        Cover::set_cover($this->params['module'],$item->id,$_FILES,$folders,$setting);
+                        $cover = new Cover();
+                        $cover->set_cover($this->params['module'],$item->id,$_FILES);
                     }
 
                     $alert .= '<div class="alert alert-success"><p>'.__('Запись успешно изменена').'</p></div>';
@@ -336,6 +326,39 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
     public function action_remove(){
 
+        $model = ORM::factory($this->params['model']);
+        $login = $id = $this->request->param('id');
+        $item  = $model->where('login','=',$login)->find();
+
+        $alert = '';
+
+        if(!$item->super_admin()){
+
+            $cover = new Cover();
+            $cover->remove_cover('users',$item->id);
+
+            if($cover){
+                $item->delete();
+
+                $alert .= '<div class="alert alert-success"><p>'.__('Запись успешно удалена').'</p></div>';
+
+                Session::instance()->set('alert',$alert);
+
+                HTTP::redirect(Route::url('admin-users'));
+            }else{
+                $alert .= '<div class="alert alert-danger"><p>'.__('Не удалось удалить запись').'</p></div>';
+
+                Session::instance()->set('alert',$alert);
+
+                HTTP::redirect(Route::url('admin-users'));
+            }
+        }else{
+            $alert .= '<div class="alert alert-danger"><p>'.__('Не удалось удалить запись').'</p></div>';
+
+            Session::instance()->set('alert',$alert);
+
+            HTTP::redirect(Route::url('admin-users'));
+        }
 
 
     }

@@ -1,4 +1,12 @@
 <div class="row">
+
+    <div class="margin-bottom-sm">
+        <div class="col-md-12">
+            <?php if(!empty($alert)) echo $alert ?>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
     <div class="col-md-12">
         <div class="box">
             <div class="box-title">

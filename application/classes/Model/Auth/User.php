@@ -19,7 +19,7 @@ class Model_Auth_User extends ORM {
 	protected $_has_many = array(
 		'user_tokens' => array('model' => 'Auth_Token'),
 		'roles'       => array('model' => 'Auth_Role', 'through' => 'via_roles_users','foreign_key' => 'user_id'),
-		'visit'       => array('model' => 'Auth_Visit','foreign_key' => 'user_id'),
+		'visit'       => array('model' => 'Auth_Visit','foreign_key' => 'user_id')
 	);
 
 	/**
@@ -205,18 +205,6 @@ class Model_Auth_User extends ORM {
 	}
 
 	/*
-	 * Photo user
-	 */
-	public function cover(){
-		$cover = ORM::factory('Covers')->where('object_type','=','users')->and_where('object_id','=',$this->id)->and_where('coverable','=',1)->find();
-		if($cover->loaded()){
-			return $cover->name;
-		}else{
-			return $cover = 'no_avatar.jpg';
-		}
-	}
-
-	/*
 	 * Check user of super admin
 	 */
 	public function super_admin(){
@@ -261,6 +249,16 @@ class Model_Auth_User extends ORM {
 		{
 			$validation->error($field, Kohana::message('validation', 'check_email'));
 		}
+	}
+
+	/*
+	 * Photo user
+	 */
+	public function cover($size = ''){
+
+		$cover = ORM::factory('Covers')->where('object_type','=','users')->and_where('object_id','=',$this->id)->get_cover('users',$size);
+
+		return $cover;
 	}
 
 } // End Auth User Model
