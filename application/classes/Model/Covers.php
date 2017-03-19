@@ -4,7 +4,6 @@ class Model_Covers extends ORM{
 	
 	protected $_table_name = 'via_covers';
 
-	private $DIR;
 	private $DIR_HOST = '/uploads/';
 	private $folder_main = 'original';
 	private $folders_default = [
@@ -25,7 +24,7 @@ class Model_Covers extends ORM{
 
 	protected function folders($type){
 
-		$DIR     = $this->DIR.$type.'/';
+		$DIR     = DOCROOT.'uploads/'.$type.'/';
 		$folders = $this->folders_default;
 
 		foreach($folders as $folder){
@@ -46,7 +45,7 @@ class Model_Covers extends ORM{
 
 		if(!empty($type) and !empty($id) and !empty($FILES)){
 
-			$DIR         = $this->DIR.$type.'/';
+			$DIR     = DOCROOT.'uploads/'.$type.'/';
 			$upload_dir  = $DIR.$this->folder_main;
 			$folders     = $this->folders($type);
 
@@ -113,9 +112,11 @@ class Model_Covers extends ORM{
 		$cover = $this->find();
 		$image = '';
 
+		$DIR     = DOCROOT.'uploads/'.$type.'/';
+
 		if($cover->loaded()){
 			if(!empty($size)){
-				if(file_exists($this->DIR.$type.'/'.$size.'/'.$cover->name)){
+				if(file_exists($DIR.'/'.$size.'/'.$cover->name)){
 					return $this->DIR_HOST.$type.'/'.$size.'/'.$cover->name;
 				}else{
 					return $this->DIR_HOST.$type.'/'.$this->folder_main.'/'.$cover->name;
@@ -134,7 +135,7 @@ class Model_Covers extends ORM{
 	public function remove_cover($type,$id){
 
 		$check_file = $this->where('object_type','=',$type)->and_where('object_id','=',$id)->find();
-		$DIR        = $this->DIR.$type.'/';
+		$DIR     	= DOCROOT.'uploads/'.$type.'/';
 		$folders  	= $this->folders($type);
 
 		if($check_file->loaded()){
