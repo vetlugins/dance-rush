@@ -4,7 +4,7 @@ class Model_Covers extends ORM{
 	
 	protected $_table_name = 'via_covers';
 
-	private $DIR = DOCROOT.'/uploads/';
+	private $DIR;
 	private $DIR_HOST = '/uploads/';
 	private $folder_main = 'original';
 	private $folders_default = [
