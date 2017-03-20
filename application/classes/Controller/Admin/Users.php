@@ -371,5 +371,12 @@ class Controller_Admin_Users extends Controller_Admin_Common {
 
     }
 
+    public function action_setting(){
+
+        Auth::instance()->logout();
+
+        HTTP::redirect('/');
+
+    }
 }
 
