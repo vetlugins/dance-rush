@@ -30,6 +30,14 @@ foreach($config->languages as $lang => $settings)
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+//Администрирование
+Route::set('admin-administration-migrations', 'admin/administration/migrations');
+Route::set('admin-administration', 'admin/administration')->defaults(['directory'  => 'Admin','controller' => 'Administration']);
+
+// Почта
+Route::set('admin-mail-user',   'admin/mail/<id>/user')->defaults(['directory'  => 'Admin','controller' => 'Mail']);
+Route::set('admin-mail',        'admin/mail')->defaults(['directory'  => 'Admin','controller' => 'Mail']);
+
 // Пользователи сайта
 Route::set('admin-users',        'admin/users')->defaults(['directory'  => 'Admin','controller' => 'Users']);
 Route::set('admin-users-add',    'admin/users/add')->defaults(array('directory' => 'Admin','controller' => 'Users','action' => 'add'));
@@ -38,6 +46,7 @@ Route::set('admin-users-edit',   'admin/users/<id>/edit')->defaults(['directory'
 Route::set('admin-users-update', 'admin/users/update')->defaults(['directory' => 'Admin','controller' => 'Users','action' => 'update']);
 Route::set('admin-users-logout', 'admin/users/logout')->defaults(['directory' => 'Admin','controller' => 'Users','action' => 'logout']);
 Route::set('admin-users-remove', 'admin/users/<id>/remove')->defaults(['directory' => 'Admin','controller' => 'Users','action' => 'remove']);
+Route::set('admin-users-setting','admin/users/<id>/setting')->defaults(['directory' => 'Admin','controller' => 'Users','action' => 'setting']);
 
 //Статистика сайта
 Route::set('admin-statistics', 'admin/statistics')->defaults(array('directory'  => 'Admin','controller' => 'Statistics'));

@@ -7,7 +7,7 @@
     <title><?php echo $config->get('title'); ?> <?php echo $config->get('version'); ?></title>
 
     <!-- Maniac stylesheets -->
-    <link rel="stylesheet" href="/templates/plugins/bootstrap/3.2.0/bootstrap.css" />
+    <link rel="stylesheet" href="<?php echo $params['plugins'] ?>bootstrap/3.2.0/bootstrap.css" />
     <link rel="stylesheet" href="<?php echo $params['plugins'] ?>icon/css/font-awesome.css" />
     <link rel="stylesheet" href="<?php echo $params['plugins'] ?>animate/animate.css" />
     <link rel="stylesheet" href="<?php echo $params['plugins'] ?>alerts/jquery.alerts.css" />
@@ -115,10 +115,10 @@
                 </div>
                 <div class="profile-btn">
                     <ul>
-                        <li><a href="<?php echo $params['url_site_admin'] ?>/account/<?php echo Auth::instance()->get_user()->login ?>" title="<?php echo __('Мой профайл') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-user"></i></a></li>
-                        <li><a href="" title="<?php echo __('Мои настройки') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-gears"></i></a></li>
-                        <li><a href="<?php echo $params['url_site_admin'] ?>/mail/<?php echo Auth::instance()->get_user()->login ?>" title="<?php echo __('Мои письма') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-envelope"></i><span class="label label-warning"><?php // echo $new_mail ?></span></a></li>
-                        <li><a href="<?php echo $params['url_site_admin'] ?>/users/logout" title="<?php echo __('Выход') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-power-off"></i></a></li>
+                        <li><a href="<?php echo Route::url('admin-users-edit',['id' => Auth::instance()->get_user()->login]) ?>" title="<?php echo __('Мой профайл') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-user"></i></a></li>
+                        <li><a href="<?php echo Route::url('admin-users-setting',['id' => Auth::instance()->get_user()->login]) ?>" title="<?php echo __('Мои настройки') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-gears"></i></a></li>
+                        <li><a href="<?php echo Route::url('admin-mail-user',['id' => Auth::instance()->get_user()->login]) ?>" title="<?php echo __('Мои письма') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-envelope"></i><span class="label label-warning"><?php // echo $new_mail ?></span></a></li>
+                        <li><a href="<?php echo Route::url('admin-users-logout') ?>" title="<?php echo __('Выход') ?>" data-toggle="tooltip"  data-placement="top"><i class="fa fa-power-off"></i></a></li>
                     </ul>
                     <div class="clearfix"></div>
                 </div>
@@ -195,6 +195,13 @@
                         <i class="fa fa-folder-open-o"></i> <span>Файловый менеджер</span>
                     </a>
                 </li>
+                <?php  if(Auth::instance()->logged_in('superadmin')){ ?>
+                    <li <?php if($params['module'] == 'administration') echo 'class="active"'; ?>>
+                        <a href="<?php echo Route::url('admin-administration') ?>">
+                            <i class="fa fa-user-secret "></i> <span><?php echo __('Администрирование') ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
             </ul>
         </div>
     </div>

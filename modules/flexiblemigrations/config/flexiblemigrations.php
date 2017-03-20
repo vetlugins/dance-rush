@@ -6,7 +6,7 @@ return array(
 	'web_frontend' => TRUE,
 
 	//Route path to web frontend
-	'web_frontend_route' => 'migrations',
+	'web_frontend_route' => 'admin/administration/migrations',
 
 	//Path where migration files are going to be generated
 	'path' => APPPATH . 'migrations/'

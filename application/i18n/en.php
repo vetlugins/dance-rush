@@ -9,6 +9,7 @@ return array(
     'Редактировать'             => 'Edit',
     'Удалить'                   => 'Delete',
     'Закрыть'                   => 'Close',
+    'Назад'                     => 'Back',
 
     'Удалить нельзя'            => 'Remove impossible',
     'Скрыть / Показать'         => 'Hide / Show',
@@ -174,6 +175,28 @@ return array(
     'Добавление пользователя'   => 'Add a user',
 
 
-    'В этом альбоме есть фотографии' => 'There are photos in this album'
+    'В этом альбоме есть фотографии' => 'There are photos in this album',
+
+    'Администрирование'         => 'Administration',
+    'секретный раздел администраторской панели'  => 'Secret section of the administration panel',
+    'Миграции'                  => 'Migration',
+    'Миграция'                  => 'Get Migration',
+    'Создать новую миграцию'    => 'Generate new migration',
+    'ЗАПУСТИТЬ ВСЕ ОЖИДАЕМЫЕ МИГРАЦИИ' => 'RUN ALL PENDING MIGRATIONS',
+    'ОТКАТИТЬ'                  => 'ROLLBACK',
+    'Список миграций'           => 'List of migrations',
+    'Статус'                    => 'Status',
+    'Завершено'                 => 'Completed',
+    'Ожидает'                   => 'Pending',
+    'Создание новой миграции'   => 'Create New Migration',
+    'Используйте только буквенно-цифровые символы и пробелы и не используйте зарезервированные слова php' => 'Please use only alphanumeric characters and spaces, and don\'t use php reserved words',
+    'Введите название миграции' => 'Enter the name of the migration',
+    'Создать миграцию'          => 'Create Migration',
+    'Необходимо указать название миграции' => 'Migration name must not be empty',
+    'Миграция ":value" была успешно создана. Проверьте папку для миграции' => 'Migration ":value" was succefully created. Check migrations folder',
+    'Миграций нет'              => 'Nothing to migrate',
+    'Миграция прошла успешно'   => 'Migration was successful'
+
+
 
 );

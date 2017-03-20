@@ -49,11 +49,9 @@ class Model_Covers extends ORM{
 			$upload_dir  = $DIR.$this->folder_main;
 			$folders     = $this->folders($type);
 
-			//Меняем название изображения, во избежание совпадении имен.
 			$ext = substr($FILES['image']['name'],strpos($FILES['image']['name'],'.'),strlen($FILES['image']['name'])-1);
 			$name = $type.'_'.$id.'_'.time().$ext;
 
-			// Загружаем оригинал изображения.
 			$filename = Upload::save($FILES['image'], $name, $upload_dir, 0777);
 
 			$cover = Image::factory($filename);
@@ -69,27 +67,22 @@ class Model_Covers extends ORM{
 
 			}
 
-			// Накладываем водяной знак
 			if(isset($setting['watermark']) and $setting['watermark'] == 1){
 				$watermark_filename = DOCROOT.'uploads/watermark/'.Params::obtain('watermark').'.png';
 				$watermark = Image::factory($watermark_filename);
-				// Водяной знак наклаывается на оригинал
 				$cover->watermark($watermark,TRUE, TRUE)->save();
 			}
 
-			//Если нам оригинал не нужен, удаляем его
 			if(isset($setting['remove_original']) and $setting['remove_original'] == 1){
 				unlink($filename);
 			}
 
-			//Теперь все это сохраняем в базе
 			$array = [
 				'object_type' => $type,
 				'object_id' => $id,
 				'name' => $name,
 			];
 
-			// Проверяем нужно ли заменить ковер
 			$check_file = $this->where('object_type','=',$type)->and_where('object_id','=',$id)->find();
 
 			if($check_file->loaded()){

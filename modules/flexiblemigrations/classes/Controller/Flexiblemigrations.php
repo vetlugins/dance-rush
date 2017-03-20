@@ -14,9 +14,9 @@
  */
 
 
-class Controller_Flexiblemigrations extends Kohana_Controller_Template {
+class Controller_Flexiblemigrations extends Controller_Admin_Common  {
 
-  public $template = 'migrations';
+  public $template = 'admin/default';
   protected $view;
 
 	public function before() 
@@ -34,6 +34,36 @@ class Controller_Flexiblemigrations extends Kohana_Controller_Template {
 		}
 
 		parent::before();
+
+		if (!Auth::instance()->logged_in('superadmin'))
+		{
+			HTTP::redirect('/admin');
+		}
+
+		$this->params['module'] = 'administration';
+		$this->params['model'] = 'Administration';
+
+		$this->page = array(
+			'icon'=>'fa-user-secret',
+			'title' => __('Администрирование'),
+			'description' => __('секретный раздел администраторской панели')
+		);
+
+		$this->template->plugin_specific = array(
+			'jgrowl/jquery.jgrowl',
+			'switchery/switchery.min',
+			'bootstrapValidator/bootstrapValidator.min',
+			'fancybox/jquery.fancybox',
+			'bootstrap-file-input/bootstrap-file-input',
+			'datatables/jquery.dataTables',
+			'datatables/dataTables.bootstrap',
+		);
+		$this->template->styles_specific = array(
+			'switchery/switchery.min',
+			'jgrowl/jquery.jgrowl',
+			'bootstrapValidator/bootstrapValidator.min',
+			'fancybox/jquery.fancybox',
+		);
 	}
 
 	public function action_index() 
@@ -41,20 +71,35 @@ class Controller_Flexiblemigrations extends Kohana_Controller_Template {
 		$migrations=$this->migrations->get_migrations();
 		rsort($migrations);
 
-		//Get migrations already runned from the DB
-		$migrations_runned = ORM::factory('Migration')->find_all()->as_array('hash');
+		$this->page['breadcrumb'] = array(
+			array($this->params['url_site_admin'] => __('Главная')),
+			array(Route::url('admin-administration') => __('Администрирование')),
+			array('current' => __('Миграции'))
+		);
 
-		$this->view = new View('flexiblemigrations/index');
+		//Get migrations already runned from the DB
+		$migrations_runned = ORM::factory('Migration')->order_by('id','DESC')->find_all()->as_array('hash');
+
+		$this->view = new View('admin/administration/migration');
 		$this->view->set_global('migrations', $migrations);
 		$this->view->set_global('migrations_runned', $migrations_runned);
 
-		$this->template->view = $this->view;
+		$this->template->content = $this->view;
 	}
 
 	public function action_new() 
 	{
-		$this->view = new View('flexiblemigrations/new');
-		$this->template->view = $this->view;
+		if (Kohana::$config->load('data.status') != 'local') HTTP::redirect(Route::url('admin-administration-migrations'));
+
+		$this->page['breadcrumb'] = array(
+			array($this->params['url_site_admin'] => __('Главная')),
+			array(Route::url('admin-administration') => __('Администрирование')),
+			array(Route::url('admin-administration-migrations') => __('Миграции')),
+			array('current' => __('Создать новую миграцию'))
+		);
+
+		$this->view = new View('admin/administration/migration_new');
+		$this->template->content = $this->view;
 	}
 
 	public function action_create() 
@@ -65,12 +110,12 @@ class Controller_Flexiblemigrations extends Kohana_Controller_Template {
 		try 
 		{
       		if (empty($migration_name)) 
-      			throw new Exception("Migration mame must not be empty");
+      			throw new Exception('<div class="alert alert-danger">'.__('Необходимо указать название миграции').'</div>');
 
 			$this->migrations->generate_migration($migration_name);
 
 			//Sets a status message
-			$session->set('message', "Migration ".$migration_name." was succefully created. Check migrations folder");
+			$session->set('message', '<div class="alert alert-success">'.__('Миграция ":value" была успешно создана. Проверьте папку для миграции', array(':value' => $migration_name)).'</div>');
 	    } 
 	    catch (Exception $e) 
 	    { 
@@ -82,12 +127,21 @@ class Controller_Flexiblemigrations extends Kohana_Controller_Template {
 
 	public function action_migrate() 
 	{
-		$this->view = new View('flexiblemigrations/migrate');
-		$this->template->view = $this->view;
+		$this->view = new View('admin/administration/migration_migrate');
+		$this->template->content = $this->view;
+
+		$this->page['breadcrumb'] = array(
+			array($this->params['url_site_admin'] => __('Главная')),
+			array(Route::url('admin-administration') => __('Администрирование')),
+			array(Route::url('admin-administration-migrations') => __('Миграции')),
+			array('current' => __('Миграция'))
+		);
 	
 		$messages = $this->migrations->migrate();
 		$this->view->set_global('messages', $messages);
 	}
+
+	// Todo Доделать rollback
 
 	public function action_rollback() 
 	{
