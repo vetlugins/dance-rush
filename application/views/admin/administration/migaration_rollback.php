@@ -10,21 +10,19 @@
 			</div>
 			<div class="box-body no-padding">
 
-				<?php if (empty($messages)) { ?>
-					<div class="alert alert-warning" style="border-radius: 0"><?php echo __('Миграций нет') ?></div>
-				<?php } else { ?>
+				<?php if ($messages) { ?>
 					<?php foreach ($messages as $message) { ?>
 						<?php if (key($message) == 0) { ?>
 							<?php echo $message[0] ?>
-							<div class="alert alert-success" style="border-radius: 0"><?php echo __('Миграция прошла успешно') ?></div>
+							<div class="alert alert-warning" style="border-radius: 0"><?php echo __('Откат прошел успешно') ?></div>
 						<?php } else { ?>
 							<?php echo $message[key($message)] ?>
 							<div class="alert alert-danger" style="border-radius: 0"><?php echo __('Ошибка') ?></div>
 						<?php } ?>
 					<?php } ?>
 				<?php } ?>
+
 			</div>
 		</div>
 	</div>
 </div>
-

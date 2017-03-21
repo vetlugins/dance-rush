@@ -195,7 +195,8 @@ return array(
     'Необходимо указать название миграции' => 'Migration name must not be empty',
     'Миграция ":value" была успешно создана. Проверьте папку для миграции' => 'Migration ":value" was succefully created. Check migrations folder',
     'Миграций нет'              => 'Nothing to migrate',
-    'Миграция прошла успешно'   => 'Migration was successful'
+    'Миграция прошла успешно'   => 'Migration was successful',
+    'Откат прошел успешно'      => 'Rollback was successful'
 
 
 

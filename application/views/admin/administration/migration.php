@@ -22,12 +22,17 @@
                 <table class="table table-hover table-striped" id="table-migration">
                     <thead>
                     <tr>
-                        <th><?php echo __('Миграции') ?></th><th><?php echo __('Статус') ?></th>
+                        <th style="width: 3%"></th><th><?php echo __('Миграции') ?></th><th><?php echo __('Статус') ?></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <?php  foreach ($migrations as $key => $migration) { ?>
+                    <?php
+                        $i = 0;
+                        foreach ($migrations as $key => $migration) {
+                            $i++;
+                    ?>
                         <tr>
+                            <td class="text-center"><?php echo  $i; ?></td>
                             <td><?php echo  basename($migration, EXT); ?></td>
                             <td>
                                 <?php   if ( array_key_exists(  substr(basename($migration, EXT), 0, 14) , $migrations_runned) ) { ?>

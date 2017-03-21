@@ -141,12 +141,18 @@ class Controller_Flexiblemigrations extends Controller_Admin_Common  {
 		$this->view->set_global('messages', $messages);
 	}
 
-	// Todo Доделать rollback
 
 	public function action_rollback() 
 	{
-		$this->view = new View('flexiblemigrations/rollback');
+		$this->view = new View('admin/administration/migration_migrate');
 		$this->template->view = $this->view;
+
+		$this->page['breadcrumb'] = array(
+			array($this->params['url_site_admin'] => __('Главная')),
+			array(Route::url('admin-administration') => __('Администрирование')),
+			array(Route::url('admin-administration-migrations') => __('Миграции')),
+			array('current' => __('Откат'))
+		);
 
 		$messages = $this->migrations->rollback();
 		$this->view->set_global('messages', $messages);
