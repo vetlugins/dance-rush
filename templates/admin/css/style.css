@@ -1219,24 +1219,30 @@ table.dataTable thead .sorting_desc:after {
     border-color: #afafaf!important;
     box-shadow: none;
 }
-.form-group.has-success label {
+.form-group.has-success label,
+.form-group.success label{
     color: #00a65a;
 }
-.form-group.has-success .form-control {
+.form-group.has-success .form-control,
+.form-group.success .form-control{
     border-color: #00a65a!important;
     box-shadow: none;
 }
-.form-group.has-warning label {
+.form-group.has-warning label,
+.form-group.warning label{
     color: #f39c12;
 }
-.form-group.has-warning .form-control {
+.form-group.has-warning .form-control,
+.form-group.warning .form-control{
     border-color: #f39c12!important;
     box-shadow: none;
 }
-.form-group.has-error label {
+.form-group.has-error label,
+.form-group label.error {
     color: #f56954;
 }
-.form-group.has-error .form-control {
+.form-group.has-error .form-control,
+.form-group.error .form-control{
     border-color: #f56954!important;
     box-shadow: none;
 }

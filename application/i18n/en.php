@@ -122,6 +122,7 @@ return array(
     'Текстовый'                 => 'Text',
     'Чекбокс'                   => 'Checkbox',
     'Изображения по умолчанию'  => 'Default images',
+    'Название раздела'          => 'Section name',
 
     'Статистика посещаемости'   => 'Attendance statistics',
     'статистика предоставлена сервисом <a href="https://metrika.yandex.ru/dashboard?id=42744419" target="_blank">Яндекс.Метрика</a>'   => 'Statistics are provided by the service <a href="https://metrika.yandex.ru/dashboard?id=42744419" target="_blank">Yandex.Metrics</a>',

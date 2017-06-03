@@ -25,8 +25,7 @@
 
     <link rel="shortcut icon" href="<?php if(isset($params['theme'])) echo $params['theme'] ?>images/favicon.ico">
 
-
-    <script src="http://momentjs.com/downloads/moment.js"></script>
+    <script src="<?php echo $params['plugins'] ?>moment/moment.js" type="text/javascript"></script>
 
 </head>
 <body class="fixed">

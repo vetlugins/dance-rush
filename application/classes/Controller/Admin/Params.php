@@ -7,7 +7,7 @@ class Controller_Admin_Params extends Controller_Admin_Common {
         parent::before();
 
         $this->params['module'] = 'params';
-        $this->params['model'] = 'Params';
+        $this->params['model'] = 'Params_Items';
 
         $this->page = array(
             'icon'=>'fa-gears',
@@ -25,20 +25,9 @@ class Controller_Admin_Params extends Controller_Admin_Common {
         $this->template->styles_specific = array(
             'switchery/switchery.min',
             'jgrowl/jquery.jgrowl',
-            'bootstrapValidator/bootstrapValidator.min',
             'fancybox/jquery.fancybox',
+            'bootstrapValidator/bootstrapValidator.min',
         );
-
-        $this->params['sections'] = [
-            '1' => __('Контакты'),
-            '2' => __('Информация о сайте'),
-            '3' => __('Технические настройки'),
-            '4' => __('Блог'),
-            '5' => __('Фотогалерея'),
-            '6' => __('Видеогалеря'),
-            '7' => __('Изображения по умолчанию')
-        ];
-
 
     }
 
@@ -51,9 +40,11 @@ class Controller_Admin_Params extends Controller_Admin_Common {
             array('current' => __('Параметры'))
         );
 
+        $sections = ORM::factory('Params_Section')->find_all();
 
         $this->template->content = View::factory('/admin/'.$this->params['module'].'/all')
-            ->bind('settings',$model);
+            ->bind('settings',$model)
+            ->bind('sections',$sections);
     }
 
     public function action_add()

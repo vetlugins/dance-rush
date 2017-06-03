@@ -1,5 +1,11 @@
 var alert = {
-  'delete': 'Удалить этот объект'
+  'delete': 'Удалить этот объект',
+    'wait': 'Секундочку'
+};
+var button = {
+    'delete': 'Удалить',
+    'add': 'Добавить',
+    'edit': 'Редактировать'
 };
 var validator ={
     'notEmpty': {
@@ -66,4 +72,9 @@ var statistics = {
     'visits': 'Визиты',
     'max': 'Максимум',
     'min': 'Минимум'
+};
+
+var params = {
+    'edit_section': 'Редатирование раздела',
+    'add_section': 'Новый раздел'
 };

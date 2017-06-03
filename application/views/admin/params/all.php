@@ -1,78 +1,77 @@
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
         <div class="box">
             <div class="box-title">
-                <i class="fa fa-sitemap"></i>
+                <i class="fa fa-gears"></i>
                 <h3><?php echo __('Список параметров сайта') ?></h3>
                 <div class="pull-right box-toolbar">
-                    <a href="/admin/<?php echo $params['module'] ?>/add" class="btn btn-xs btn-success"><?php echo __('Добавить') ?></a>
+                    <a href="<?php echo Route::url('admin-params-add') ?>" class="btn btn-xs btn-success"><?php echo __('Добавить') ?></a>
                 </div>
             </div>
             <div class="box-body no-padding">
-                <?php if(isset($settings)){ ?>
-                    <ul class="nav nav-tabs">
-                        <?php
-                        $i = 1;
-                        foreach($params['sections'] as $key=>$section){
-                            if($i == 1) $active = 'class="active"';
-                            else $active = '';
 
-                            echo '<li '.$active.'><a href="#'.$key.'" data-toggle="tab">'.$section.'</a></li>';
+            </div>
+        </div>
+    </div>
 
-                            $i++;
-                        }
-                        ?>
-                    </ul>
-                    <div class="tab-content table-responsive no-padding">
-                        <?php
-                        $n = 1;
-                        foreach($params['sections'] as $key=>$section){
-                            if($n == 1) $active = 'active';
-                            else $active = '';
-                            ?>
-                            <div id="<?php echo $key ?>" class="tab-pane <?php echo $active ?>">
-                                <table class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th style="width:30%"><?php echo __('Название параметра') ?></th>
-                                        <th style="width:20%"><?php echo __('Идентификатор параметра') ?></th>
-                                        <th style="width:40%"><?php echo __('Значение параметра') ?></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-                                    foreach($settings->section($key) as $set){
-
-                                        $stroke = '';
-
-                                        switch($set->type){
-                                            case 'text': $stroke = $set->value;
-                                                break;
-                                            case 'image': $stroke = '
-                                                <a href="/uploads/system/logo/'.$set->value.'" title="'.__('Изображение').'" class="btn btn-default btn-sm fancybox"><i class="fa fa-photo"></i> '.$set->value.'</a>';
-                                                break;
-                                            case 'checkbox':
-                                                if($set->value == 1) $box_check = __('вкл'); else $box_check = __('выкл');
-                                                $stroke = $box_check;
-                                        }
-
-                                        echo '<tr>
-                                                <td><a href="/admin/params/'.$key.'/'.$set->name.'">'.$set->title.'</a></td>
-                                                <td>'.$set->name.'</td>
-                                                <td>'.$stroke.'</td>
-                                              </tr>';
-                                    }
-                                    ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <?php $n++;
-                        }
-                        ?>
+    <div class="col-md-4">
+        <div class="box">
+            <div class="box-title">
+                <i class="fa fa-folder-open"></i>
+                <h3><?php echo __('Разделы') ?></h3>
+                <?php if(Auth::instance()->logged_in('superadmin')) { ?>
+                    <div class="pull-right box-toolbar">
+                        <a id="0" class="btn btn-xs btn-success section-params"><?php echo __('Добавить') ?></a>
                     </div>
-                    <div class="clearfix"></div>
                 <?php } ?>
             </div>
+            <div class="box-body no-padding">
+                <?php
+                if(isset($sections)){
+
+                    echo '<ul class="list-group">';
+
+                    foreach($sections as $section){
+                        echo '<li class="list-group-item">'.$section->title.' <span class="badge">'.$section->params->count_all().'</span></li>';
+                    }
+
+                    echo '</ul>';
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="section-params" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="paramsSection" class="form-horizontal" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="title" class="col-sm-4 control-label"><?php echo __('Название раздела') ?></label>
+                        <div class="col-sm-8">
+                            <input type="text" name="title" class="form-control required" id="title" placeholder="Название" >
+                            <input type="hidden" name="section_id" id="section_id">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-sm-6">
+                        <div class="pull-left">
+                            <div class="result"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><?php echo __('Закрыть') ?></button>
+                        <input  type="submit" class="btn btn-success" id="buttonParamsSection">
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

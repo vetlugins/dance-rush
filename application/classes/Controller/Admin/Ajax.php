@@ -97,6 +97,23 @@ class Controller_Admin_Ajax extends Controller{
 ////////////////////////////////////////////////////////////////////////////////
     public function action_add()
     {
+        if($this->request->post('paramsSection') == 'paramsSection'){
+
+            $post = $this->request->post();
+
+            $validation = Validation::factory($post)
+                ->rule('url', 'Model_Params_Section::check_title',array(':value',':validation', ':field'));
+
+            if (!$validation->check()) {
+                $errors[] = $validation->errors('validation');
+            }else{
+
+                ORM::factory('Params_Section')->values('title',$this->request->post('title'))->save();
+
+            }
+
+            echo $this->request->post('title');
+        }
         if (isset($_POST['insertPhotoAlbum'])) {
 
             $errors = array();
@@ -272,6 +289,15 @@ class Controller_Admin_Ajax extends Controller{
             $item = ORM::factory('Video_Album')->where('id','=',$_POST['id'])->find();
 
             $album = array('title' => $item->title,'url' => $item->url,'lang' => $item->lang,'id' => $item->id);
+
+            echo json_encode($album);
+        }
+
+        if (isset($_POST['loadParamsSection'])) {
+
+            $item = ORM::factory('Params_Section')->where('id','=',$_POST['id'])->find();
+
+            $album = array('title' => $item->title);
 
             echo json_encode($album);
         }
